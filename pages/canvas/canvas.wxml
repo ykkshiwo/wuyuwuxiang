@@ -1,0 +1,3 @@
+<!--pages/canvas/canvas.wxml-->
+<text>pages/canvas/canvas.wxml</text>
+<canvas style="width: 700rpx; height: 600rpx;" class='canvas' canvas-id="firstCanvas"></canvas>
