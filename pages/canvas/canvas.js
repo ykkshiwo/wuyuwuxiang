@@ -1,5 +1,5 @@
 // pages/canvas/canvas.js
-const m = require('../../dataofmap/china.js')
+const m = require('../../dataofmap/suojian_china_map_ok3.js')
 const map = m.map
 
 Page({
@@ -26,16 +26,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const map_0 = map['0']
-    console.log(map_0.length)
-    const longs = map_0['0']
-    const lats = map_0['1']
     var context = wx.createCanvasContext('firstCanvas')
     context.setStrokeStyle("#00ff00")
     context.setLineWidth(1)
-    context.moveTo(longs[0], lats[0])
-    for (var i = 1; i < longs.length; i++) {
-      context.lineTo(longs[i], lats[i])
+    for (var key in map) {
+      var p = map[key]
+      const longs = p['0']
+      const lats = p['1']
+      context.moveTo(longs[0], 200-lats[0])
+      for (var i = 1; i < longs.length; i++) {
+        context.lineTo(longs[i], 200-lats[i])
+      }
     }
     context.stroke()
     context.draw()
