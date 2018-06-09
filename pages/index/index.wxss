@@ -1,10 +1,9 @@
-/**index.wxss**/
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+ 
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
@@ -18,4 +17,16 @@
 
 .usermotto {
   margin-top: 200px;
+}
+
+.xiexin {
+ border: 1px solid blue;
+ border-radius: 5px;
+ padding: 10rpx 40rpx 10rpx 40rpx;
+}
+
+.xiexin-wenzi{
+  color: blue;
+  font-family: "Times New Roman";
+  font-size: 30rpx;
 }

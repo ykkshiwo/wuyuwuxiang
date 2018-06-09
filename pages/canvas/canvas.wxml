@@ -1,3 +1,7 @@
 <!--pages/canvas/canvas.wxml-->
-<text>pages/canvas/canvas.wxml</text>
-<canvas style="width: 800rpx; height: 1500rpx;" class='canvas' canvas-id="firstCanvas"></canvas>
+<view>
+<canvas style='width: {{ s_width }}px; height: {{ s_height*0.75 }}px;' class='canvas' canvas-id="firstCanvas"></canvas>
+<view class='wenzi'>
+hello world
+</view>
+</view>

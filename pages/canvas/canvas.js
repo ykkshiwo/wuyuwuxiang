@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    s_width: 0,
+    s_height: 0,
     yuliu_w: 0,
     yuliu_h: 0
   },
@@ -20,14 +22,29 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         console.log(res.screenHeight, res.screenWidth)
+        var s_width = res.screenWidth
+        var s_height = res.screenHeight
         var yuliu_w = res.screenWidth * 0.05
         var yuliu_h = res.screenHeight * 0.08
         that.setData({
           yuliu_w: yuliu_w,
-          yuliu_h: yuliu_h
+          yuliu_h: yuliu_h,
+          s_width: s_width,
+          s_height: s_height
         })
       },
     })
+
+    console.log(options.home_address, options.school_address)
+    this.setData({
+      home_long: options.home_long,
+      home_lat: options.home_lat,
+      home_address: options.home_address,
+      school_long: options.school_long,
+      school_lat: options.school_lat,
+      school_address: options.school_address,
+    })
+
   },
 
   /**
@@ -41,11 +58,12 @@ Page({
       var p = map[key]
       const longs = p['0']
       const lats = p['1']
-      context.moveTo(this.longToZB(longs[0], 412), this.latToZB(lats[0], 732))
+      context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
       for (var i = 1; i < longs.length; i++) {
-        context.lineTo(this.longToZB(longs[i], 412), this.latToZB(lats[i], 732))
+        context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
       }
     }
+    
     context.stroke()
     context.draw()
   },

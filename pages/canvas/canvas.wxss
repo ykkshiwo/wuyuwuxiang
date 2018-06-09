@@ -2,3 +2,9 @@
 .canvas{
   border: 1px solid blue;
 }
+
+.wenzi{
+  position: absolute;
+  left: 5%;
+  top: 55%;
+}

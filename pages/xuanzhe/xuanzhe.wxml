@@ -1,0 +1,40 @@
+<view class='page'>
+<!-- <view class='home' catchtap='xuanLocation'> -->
+<!-- <text class='home_text'>家</text> -->
+<!-- </view> -->
+<view class='bacheng'>
+<view class='home'>
+<radio-group class="radio-group" bindchange="radioChange">
+  <view class='radio'>
+    <radio value="{{home.name}}" checked="{{home.checked}}"/>{{home.value}}
+  </view>
+</radio-group>
+</view>
+<view class='home_address' catchtap='xuanLocationHome'>
+<view class='juti_address'>经度： {{ home_long }}</view>
+<view class='juti_address'>维度： {{ home_lat }}</view>
+<view class='juti_address'>具体地址： {{ home_address }}</view>
+</view>
+
+<view class='xuanzhe'>
+<radio-group class="radio-group" bindchange="radioChange">
+  <label class="radio" wx:for="{{items}}">
+  <view class='radio'>
+    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+  </view>
+  </label>
+</radio-group>
+</view>
+
+<view class='home_address' catchtap='xuanLocationSchool'>
+<view class='juti_address'>经度： {{ school_long }}</view>
+<view class='juti_address'>维度： {{ school_lat }}</view>
+<view class='juti_address'>具体地址： {{ school_address }}</view>
+</view>
+</view>
+
+<view class='button' >
+<button plain='true' bindtap='produce' type='primary'>生成图像</button>
+</view>
+
+</view>
