@@ -1,4 +1,7 @@
 // pages/canvas/canvas.js
+const m = require('../../dataofmap/china.js')
+const map = m.map
+
 Page({
 
   /**
