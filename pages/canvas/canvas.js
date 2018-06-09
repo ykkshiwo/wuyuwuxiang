@@ -26,13 +26,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    const map_0 = map['0']
+    console.log(map_0.length)
+    const longs = map_0['0']
+    const lats = map_0['1']
     var context = wx.createCanvasContext('firstCanvas')
     context.setStrokeStyle("#00ff00")
-    context.setLineWidth(5)
-    context.moveTo(100, 80)
-    context.lineTo(100, 180)
-    context.lineTo(375, 60)
-    context.lineTo(100, 80)
+    context.setLineWidth(1)
+    context.moveTo(longs[0], lats[0])
+    for (var i = 1; i < longs.length; i++) {
+      context.lineTo(longs[i], lats[i])
+    }
     context.stroke()
     context.draw()
   },
