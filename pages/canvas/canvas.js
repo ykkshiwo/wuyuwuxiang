@@ -1,4 +1,5 @@
 // pages/canvas/canvas.js
+const app = getApp()
 const m = require('../../dataofmap/suojian_china_map_ok3.js')
 const d = require('../../utils/distance.js')
 const map = m.map
@@ -132,11 +133,14 @@ Page({
     context.beginPath()
     context.setFontSize(20)
     context.setFillStyle('yellow')
-    context.fillText("吾与吾乡", 0.05 * this.data.s_width, this.data.s_height*0.10)
+    context.fillText("吾与吾乡", 0.05 * this.data.s_width + 50, this.data.s_height*0.10)
     context.stroke()
 
     context.drawImage('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528629995333&di=bbb714cf5a49d184f57965c3ac0ed430&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FCGBwDzm68I03cfMwd07ZXA%3D%3D%2F6631474585004357907.jpg',
       0.05 * this.data.s_width, 0.65 * this.data.s_height, 98, 98)
+
+    context.drawImage(app.globalData.userInfo.avatarUrl,
+      0.05 * this.data.s_width, 0.1 * this.data.s_height, 50, 50)
 
     context.draw()
   },
