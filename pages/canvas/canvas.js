@@ -13,7 +13,7 @@ Page({
     s_width: 0,
     s_height: 0,
     yuliu_w: 0,
-    yuliu_h: 0
+    yuliu_h: 0,
   },
 
   /**
@@ -152,11 +152,19 @@ Page({
     //   0.05 * this.data.s_width, 0.65 * this.data.s_height, 98, 98)
 
     try{
-      context.drawImage(app.globalData.userInfo.avatarUrl,
-        0.05 * this.data.s_width, 0.45 * this.data.s_height, 50, 50)
+      var avatarurl_width = 80;    //绘制的头像宽度
+      var avatarurl_heigth = 80;   //绘制的头像高度
+      var avatarurl_x = 0.05*this.data.s_width;   //绘制的头像在画布上的位置
+      var avatarurl_y = 0.4*this.data.s_height;   //绘制的头像在画布上的位置
+      console.log(avatarurl_heigth)
+      context.beginPath()
+      context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false)
+      context.clip()
+      console.log(app.globalData.userInfo.avatarUrl)
+      context.drawImage(app.globalData.userInfo.avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
     }
     catch(err){
-      console.log("can't")
+      console.log(err)
     }
 
     context.draw()
@@ -235,6 +243,11 @@ Page({
       icon: 'success',
       duration: 2000
     })
-  }
+  },
 
+  toIndex: function(){
+    wx.redirectTo({
+      url: '../index/index'
+    })
+  }
 })
