@@ -105,6 +105,9 @@ Page({
     context.setFillStyle('#0A0A0A')
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
+    context.setFillStyle('#00EE00')
+    context.fillRect(0.05 * this.data.s_width - 2, 0.57 * this.data.s_height - 2, 136, 136)
+
     context.beginPath()
     context.setStrokeStyle("#00EE00")
     context.setLineWidth(0.5)
@@ -144,12 +147,11 @@ Page({
 
     context.setFontSize(16)
     context.setFillStyle('green')
-    context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.55 * this.data.s_height)
-    context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.6 * this.data.s_height)
+    context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+    context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
     context.stroke()
 
-    // context.drawImage('https://wwww.kkykykk.club/www.jpg',
-    //   0.05 * this.data.s_width, 0.65 * this.data.s_height, 98, 98)
+    context.drawImage('../../images/ggg.png',0.05 * this.data.s_width, 0.57 * this.data.s_height, 132, 132)
 
     try{
       var avatarurl_width = 80;    //绘制的头像宽度
