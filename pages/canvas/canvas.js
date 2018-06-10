@@ -19,6 +19,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#B0B0B0',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
     var that = this
     wx.getSystemInfo({
       success: function(res) {
@@ -89,7 +97,7 @@ Page({
   onReady: function () {
     console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
     var context = wx.createCanvasContext('firstCanvas')
-    context.setStrokeStyle("#00ff00")
+    context.setStrokeStyle("blue")
     context.setLineWidth(0.5)
     for (var key in map) {
       var p = map[key]
@@ -104,23 +112,32 @@ Page({
 
     context.beginPath()
     context.setStrokeStyle("red")
-    context.setLineWidth(2)
+    context.setLineWidth(1)
     context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
     context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
     context.stroke()
 
     context.beginPath()
     context.setStrokeStyle("yellow")
-    context.setLineWidth(2)
+    context.setLineWidth(1)
     context.setLineDash([2, 2], 10)
     context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
     context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
 
     context.setFontSize(16)
-    context.fillText("从我家到"+this.data.To, 0.05 * this.data.s_width, 0.55 * this.data.s_height)
-    context.fillText("直线距离为：" + this.data.dis, 0.05 * this.data.s_width + "公里", 0.6 * this.data.s_height)
-
+    context.fillText("从我家到我"+this.data.To, 0.05 * this.data.s_width, 0.55 * this.data.s_height)
+    context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.6 * this.data.s_height)
     context.stroke()
+
+    context.beginPath()
+    context.setFontSize(20)
+    context.setFillStyle('yellow')
+    context.fillText("吾与吾乡", 0.05 * this.data.s_width, this.data.s_height*0.10)
+    context.stroke()
+
+    context.drawImage('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528629995333&di=bbb714cf5a49d184f57965c3ac0ed430&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FCGBwDzm68I03cfMwd07ZXA%3D%3D%2F6631474585004357907.jpg',
+      0.05 * this.data.s_width, 0.65 * this.data.s_height, 98, 98)
+
     context.draw()
   },
 

@@ -2,6 +2,7 @@
 <!-- <view class='home' catchtap='xuanLocation'> -->
 <!-- <text class='home_text'>家</text> -->
 <!-- </view> -->
+<view class='ok'>
 <view class='bacheng'>
 <view class='home'>
 <radio-group class="radio-group" bindchange="radioChange">
@@ -32,9 +33,12 @@
 <view class='juti_address'>具体地址： {{ school_address }}</view>
 </view>
 </view>
+</view>
 
+<view class='button_w'>
 <view class='button' >
 <button plain='true' bindtap='produce' type='primary'>生成图像</button>
+</view>
 </view>
 
 </view>

@@ -1,9 +1,15 @@
 /* pages/xuanzhe/xuanzhe.wxss */
 .page{
   /* border: 1rpx solid red; */
-  padding-left: 15rpx;
-  padding-right: 15rpx;
-  height: 98%;
+  /* padding-left: 5rpx; */
+  /* padding-right: 5rpx; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  height: 100%;
+  width: 100%;
+  /* border: 1rpx solid red; */
+  background-color: #EBEBEB;
 }
 
 .home{
@@ -43,5 +49,23 @@
 }
 
 .button{
+  /* width: 98%;
+  height: 10%; */
+  /* border: 1rpx solid red;  */
+  padding-top: 5rpx;
+  /* align-items: center; */
+}
+
+.button_w{
   width: 98%;
+  height: 10%;
+  align-items: center;
+}
+
+
+.ok{
+  width: 100%;
+  /* border: 1rpx solid red; */
+  height: 90%;
+  padding-left: 18rpx;
 }

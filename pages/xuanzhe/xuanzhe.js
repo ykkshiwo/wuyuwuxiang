@@ -6,7 +6,7 @@ Page({
    */
   data: {
     items: [
-      { name: '我的大学', value: '我的大学' },
+      { name: '的大学', value: '我的大学' },
       { name: '工作的地方', value: '工作的地方'},
       { name: '即将去的远方', value: '即将到达的远方' },
     ],
