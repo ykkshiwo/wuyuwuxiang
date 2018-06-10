@@ -97,6 +97,9 @@ Page({
    */
   onReady: function () {
     console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
+    wx.showLoading({
+      title: '绘制中······',
+    })
     var context = wx.createCanvasContext('firstCanvas')
 
     context.setFillStyle('#B0B0B0')
@@ -119,7 +122,7 @@ Page({
     context.beginPath()
     context.setStrokeStyle("red")
     context.setLineWidth(1)
-    context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
+    // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
     context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
     context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
     context.stroke()
@@ -135,8 +138,8 @@ Page({
     context.beginPath()
     context.setFontSize(20)
     context.setFillStyle('#00FFFF')
-    context.font = "normal small-caps 50 25px Arial"
-    context.fillText("吾与吾乡", 0.4 * this.data.s_width, this.data.s_height*0.10)
+    context.font = "normal small-caps 50 22px Arial"
+    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.10)
     context.stroke()
 
     context.setFontSize(16)
@@ -157,6 +160,8 @@ Page({
     }
 
     context.draw()
+
+    wx.hideLoading()
   },
 
   longToZB: function(long, sw){
@@ -224,6 +229,11 @@ Page({
           filePath: tempFilePath,
         })
       }
+    })
+    wx.showToast({
+      title: '成功',
+      icon: 'success',
+      duration: 2000
     })
   }
 

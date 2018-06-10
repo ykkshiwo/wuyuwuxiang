@@ -42,6 +42,13 @@ Page({
           home_address: address_
         })
       },
+      fail: function(){
+        wx.openSetting({
+          success: function (res) {
+            console.log(res.authSetting)
+          }
+        })
+      }
     })
   },
 
@@ -60,6 +67,13 @@ Page({
           school_address: address_
         })
       },
+      fail: function () {
+        wx.openSetting({
+          success: function (res) {
+            console.log(res.authSetting)
+          }
+        })
+      }
     })
   },
 
@@ -81,14 +95,37 @@ Page({
   },
 
   produce: function(){
+    if(this.data.home_lat && this.data.school_lat){
+      console.log("go")
+      this.tiaoZhuan(this)
+    }
+    else{
+      var that = this
+      wx.showModal({
+        title: '提示',
+        content: '您未选择完整地理数据，将导致绘图出现错误，继续点击确定，重选点击取消',
+        success: function(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            that.tiaoZhuan(that)
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
+
+
+  tiaoZhuan: function(t){
     wx.navigateTo({
-      url: "/pages/canvas/canvas?home_long=" + this.data.home_long + 
-      "&home_lat=" + this.data.home_lat + 
-      "&home_address=" + this.data.home_address + 
-      "&school_lat=" + this.data.school_lat +
-      "&school_long=" + this.data.school_long +
-      "&school_address=" + this.data.school_address +
-      "&To=" + this.data.To,
+      url: "/pages/canvas/canvas?home_long=" + t.data.home_long +
+      "&home_lat=" + t.data.home_lat +
+      "&home_address=" + t.data.home_address +
+      "&school_lat=" + t.data.school_lat +
+      "&school_long=" + t.data.school_long +
+      "&school_address=" + t.data.school_address +
+      "&To=" + t.data.To,
       success: function () {
       }
     })
