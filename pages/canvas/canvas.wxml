@@ -1,11 +1,9 @@
 <!--pages/canvas/canvas.wxml-->
-<view>
-<canvas style='width: {{ s_width }}px; height: {{ s_height*0.75 }}px;' class='canvas' canvas-id="firstCanvas"></canvas>
+<view class='all-page'>
+<canvas style='width: 100%; height: 100%;' class='canvas' canvas-id="firstCanvas"></canvas>
 
-<view class='wenzi'>
-hello world
+<view class='button_w'>
+<button catchtap='daochuCanvas' type='primary' plain='true'>导出图像</button>
 </view>
-
-<button catchtap='daochuCanvas'>导出图像</button>
 
 </view>

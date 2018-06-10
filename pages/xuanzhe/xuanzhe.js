@@ -10,17 +10,21 @@ Page({
       { name: '工作的地方', value: '工作的地方'},
       { name: '即将去的远方', value: '即将到达的远方' },
     ],
-    home: { name: '家', value: '家'},
-    school_lat: 0,
-    school_long: 0,
+    home: { name: '家', value: '家', checked: true},
+    school_lat: '',
+    school_long: '点击选择地点',
     school_address: '',
-    home_lat: 0,
-    home_long: 0,
+    home_lat: '',
+    home_long: '点击选择地点',
     home_address: '',
   },
 
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
+    var v = e.detail.value
+    this.setData({
+      To: v
+    })
   },
 
   xuanLocationHome: function(){
@@ -83,7 +87,8 @@ Page({
       "&home_address=" + this.data.home_address + 
       "&school_lat=" + this.data.school_lat +
       "&school_long=" + this.data.school_long +
-      "&school_address=" + this.data.school_address,
+      "&school_address=" + this.data.school_address +
+      "&To=" + this.data.To,
       success: function () {
       }
     })

@@ -1,5 +1,6 @@
 // pages/canvas/canvas.js
 const m = require('../../dataofmap/suojian_china_map_ok3.js')
+const d = require('../../utils/distance.js')
 const map = m.map
 
 Page({
@@ -43,6 +44,7 @@ Page({
       school_long: options.school_long,
       school_lat: options.school_lat,
       school_address: options.school_address,
+      To: options.To,
     })
 
     var x_1 = this.longToZB(this.data.home_long, this.data.s_width)
@@ -56,7 +58,7 @@ Page({
     var x_pian_ = Math.sqrt( (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2) ) * 0.5
     // console.log("look: ", x_pian_)
 
-    var x_pian = x_pian_ * 0.85
+    var x_pian = x_pian_ * 0.75
     var y_pian = ( Math.abs(x_2) - Math.abs(x_1) ) * x_pian / ( Math.abs(y_1) - Math.abs(y_2) )
 
     if ( (y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1) ){
@@ -73,16 +75,22 @@ Page({
       y_anchor: y_anchor
     })
 
+    var dis = d.getDistance(this.data.home_lat, this.data.home_long, this.data.school_lat, this.data.school_long)
+    // console.log( "distance: ", dis)
+    this.setData({
+      dis: dis
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data.home_long, this.data.home_lat, this.data._school_long, this.data.school_lat)
+    console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
     var context = wx.createCanvasContext('firstCanvas')
     context.setStrokeStyle("#00ff00")
-    context.setLineWidth(1)
+    context.setLineWidth(0.5)
     for (var key in map) {
       var p = map[key]
       const longs = p['0']
@@ -92,12 +100,25 @@ Page({
         context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
       }
     }
+    context.stroke()
 
+    context.beginPath()
+    context.setStrokeStyle("red")
+    context.setLineWidth(2)
     context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
     context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+    context.stroke()
 
+    context.beginPath()
+    context.setStrokeStyle("yellow")
+    context.setLineWidth(2)
+    context.setLineDash([2, 2], 10)
     context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
     context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+
+    context.setFontSize(16)
+    context.fillText("从我家到"+this.data.To, 0.05 * this.data.s_width, 0.55 * this.data.s_height)
+    context.fillText("直线距离为：" + this.data.dis, 0.05 * this.data.s_width + "公里", 0.6 * this.data.s_height)
 
     context.stroke()
     context.draw()
