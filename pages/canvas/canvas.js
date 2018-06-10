@@ -45,12 +45,41 @@ Page({
       school_address: options.school_address,
     })
 
+    var x_1 = this.longToZB(this.data.home_long, this.data.s_width)
+    var y_1 = this.latToZB(this.data.home_lat, this.data.s_height)
+    var x_2 = this.longToZB(this.data.school_long, this.data.s_width)
+    var y_2 = this.latToZB(this.data.school_lat, this.data.s_height)
+
+    var y_middle = ( y_1 - y_2 )/2 + y_2
+    var x_middle = ( x_2 - x_1 )/2 + x_1
+
+    var x_pian_ = Math.sqrt( (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2) ) * 0.5
+    // console.log("look: ", x_pian_)
+
+    var x_pian = x_pian_ * 0.85
+    var y_pian = ( Math.abs(x_2) - Math.abs(x_1) ) * x_pian / ( Math.abs(y_1) - Math.abs(y_2) )
+
+    if ( (y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1) ){
+      var x_anchor = x_middle + x_pian
+      var y_anchor = y_middle + y_pian
+    }
+    else{
+      var x_anchor = x_middle - x_pian
+      var y_anchor = y_middle - y_pian
+    }
+
+    this.setData({
+      x_anchor: x_anchor,
+      y_anchor: y_anchor
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log(this.data.home_long, this.data.home_lat, this.data._school_long, this.data.school_lat)
     var context = wx.createCanvasContext('firstCanvas')
     context.setStrokeStyle("#00ff00")
     context.setLineWidth(1)
@@ -63,7 +92,13 @@ Page({
         context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
       }
     }
-    
+
+    context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
+    context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+
+    context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+    context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+
     context.stroke()
     context.draw()
   },
@@ -117,5 +152,23 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  daochuCanvas: function(){
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: this.data.s_width,
+      height: this.data.s_height,
+      canvasId: 'firstCanvas',
+      success: function (res) {
+        console.log(res.tempFilePath)
+        var tempFilePath = res.tempFilePath
+        wx.saveImageToPhotosAlbum({
+          filePath: tempFilePath,
+        })
+      }
+    })
   }
+
 })
