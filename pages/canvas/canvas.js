@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: '#000000',
-      backgroundColor: '#B0B0B0',
+      backgroundColor: '#0A0A0A',
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -102,11 +102,11 @@ Page({
     })
     var context = wx.createCanvasContext('firstCanvas')
 
-    context.setFillStyle('#B0B0B0')
+    context.setFillStyle('#0A0A0A')
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
     context.beginPath()
-    context.setStrokeStyle("blue")
+    context.setStrokeStyle("#00EE00")
     context.setLineWidth(0.5)
     for (var key in map) {
       var p = map[key]
@@ -143,7 +143,7 @@ Page({
     context.stroke()
 
     context.setFontSize(16)
-    context.setFillStyle('black')
+    context.setFillStyle('green')
     context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.55 * this.data.s_height)
     context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.6 * this.data.s_height)
     context.stroke()

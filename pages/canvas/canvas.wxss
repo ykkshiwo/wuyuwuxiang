@@ -6,12 +6,12 @@
   height: 100%;
   width: 100%;
    /* border: 1rpx solid red;  */
-  background-color: #B0B0B0;
+  background-color: #0A0A0A;
 }
 
 .canvas{
   /* border: 1px solid blue; */
-  background-color: #B0B0B0;
+  background-color: #0A0A0A;
 }
 
 .wenzi{
@@ -32,7 +32,7 @@
   height: 11%;
   padding: 5rpx;
   align-items: center;
-  background-color: #B0B0B0;
+  background-color: #0A0A0A;
   /* border: 1rpx solid black;  */
   display: flex;
   flex-direction: row;
