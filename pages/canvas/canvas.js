@@ -110,7 +110,7 @@ Page({
 
     context.beginPath()
     context.setStrokeStyle("#00EE00")
-    context.setLineWidth(0.5)
+    context.setLineWidth(1)
     for (var key in map) {
       var p = map[key]
       const longs = p['0']
@@ -139,11 +139,30 @@ Page({
     context.stroke()
 
     context.beginPath()
+    context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+    context.setFillStyle('red')
+    context.fill()
+
+    context.beginPath()
+    context.arc(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+    context.setFillStyle('blue')
+    context.fill()
+
+    context.beginPath()
     context.setFontSize(20)
     context.setFillStyle('#00FFFF')
     context.font = "normal small-caps 50 22px Arial"
     context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.10)
     context.stroke()
+
+    try{
+      context.setFontSize(22)
+      context.setFillStyle('green')
+      context.fillText(app.globalData.userInfo.nickName, 0.05 * this.data.s_width, 0.49 * this.data.s_height)
+    }
+    catch(err){
+      console.log(err)
+    }
 
     context.setFontSize(16)
     context.setFillStyle('green')
@@ -151,23 +170,23 @@ Page({
     context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
     context.stroke()
 
-    context.drawImage('../../images/ggg.png',0.05 * this.data.s_width, 0.57 * this.data.s_height, 132, 132)
+    context.drawImage('../../images/erweima.png',0.05 * this.data.s_width, 0.57 * this.data.s_height, 132, 132)
 
-    try{
-      var avatarurl_width = 80;    //绘制的头像宽度
-      var avatarurl_heigth = 80;   //绘制的头像高度
-      var avatarurl_x = 0.05*this.data.s_width;   //绘制的头像在画布上的位置
-      var avatarurl_y = 0.4*this.data.s_height;   //绘制的头像在画布上的位置
-      console.log(avatarurl_heigth)
-      context.beginPath()
-      context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false)
-      context.clip()
-      console.log(app.globalData.userInfo.avatarUrl)
-      context.drawImage(app.globalData.userInfo.avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
-    }
-    catch(err){
-      console.log(err)
-    }
+    // try{
+    //   var avatarurl_width = 80;    //绘制的头像宽度
+    //   var avatarurl_heigth = 80;   //绘制的头像高度
+    //   var avatarurl_x = 0.05*this.data.s_width;   //绘制的头像在画布上的位置
+    //   var avatarurl_y = 0.4*this.data.s_height;   //绘制的头像在画布上的位置
+    //   console.log(avatarurl_heigth)
+    //   context.beginPath()
+    //   context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false)
+    //   context.clip()
+    //   console.log(app.globalData.userInfo.avatarUrl)
+    //   context.drawImage(app.globalData.userInfo.avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
+    // }
+    // catch(err){
+    //   console.log(err)
+    // }
 
     context.draw()
 
@@ -249,7 +268,7 @@ Page({
 
   toIndex: function(){
     wx.redirectTo({
-      url: '../index/index'
+      url: '../xuanzhe/xuanzhe'
     })
   }
 })

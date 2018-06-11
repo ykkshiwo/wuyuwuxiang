@@ -36,7 +36,7 @@
 
 .xuanzhe{
   /* border: 1rpx solid gray; */
-  margin-top: 10%;
+  margin-top: 15%;
 }
 
 .radio{

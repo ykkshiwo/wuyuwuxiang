@@ -10,3 +10,6 @@
     <text class="xiexin-wenzi">吾与吾乡</text>
   </navigator>
 </view>
+  <view style='height: 10%; width: 100%;'>
+  hello world
+  </view>
