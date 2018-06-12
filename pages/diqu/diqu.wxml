@@ -1,0 +1,13 @@
+<!--pages/diqu/diqu.wxml-->
+<text>pages/diqu/diqu.wxml</text>
+  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">
+      当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+    </view>
+  </picker>
+
+  <button catchtap=''>添加</button>
+
+  <view>
+  {{ region }}
+  </view>

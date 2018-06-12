@@ -9,6 +9,8 @@ Page({
       { name: '的大学', value: '我的大学' },
       { name: '工作的地方', value: '工作的地方'},
       { name: '即将去的远方', value: '即将到达的远方' },
+      { name: '想到达的远方', value: '想到达的远方' },
+      { name: '已经到达的远方', value: '已经到达的远方' },
     ],
     home: { name: '家', value: '家', checked: true},
     school_lat: '',
