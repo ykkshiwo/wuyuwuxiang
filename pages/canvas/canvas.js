@@ -110,7 +110,7 @@ Page({
 
     context.beginPath()
     context.setStrokeStyle("#00EE00")
-    context.setLineWidth(1)
+    context.setLineWidth(1.5)
     for (var key in map) {
       var p = map[key]
       const longs = p['0']
