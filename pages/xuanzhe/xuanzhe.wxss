@@ -36,7 +36,7 @@
 
 .xuanzhe{
   /* border: 1rpx solid gray; */
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 .radio{
@@ -67,5 +67,24 @@
   width: 100%;
   /* border: 1rpx solid red; */
   height: 90%;
-  padding-left: 18rpx;
+  /* padding-left: 18rpx;
+  padding-right: 28rpx; */
+  padding: 20rpx;
+}
+
+.xuanzhe-citys{
+  margin-top: 8rpx;
+}
+
+.citys{
+  margin-top: 8rpx;
+   border: 1rpx solid red;
+}
+
+dis-citys{
+  margin-top: 3rpx;
+}
+
+.dis-citys-name{
+  color: blue;
 }

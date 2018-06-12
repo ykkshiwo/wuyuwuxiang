@@ -27,11 +27,25 @@
 </radio-group>
 </view>
 
-<view class='home_address' catchtap='xuanLocationSchool'>
+<view wx:if = "{{ is_x_yj }}" class='citys'>
+  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">
+      选择后点击添加：
+      <view class='xuanzhe-citys'>{{region[0]}}，{{region[1]}}</view>
+    </view>
+  </picker>
+  <button catchtap='tianJia'>添加</button>
+  <view class='dis-citys'>
+  <text class='dis-citys-name'>{{ allCity }}</text>
+  </view>
+</view>
+
+<view wx:else class='home_address' catchtap='xuanLocationSchool'>
 <view class='juti_address'>经度： {{ school_long }}</view>
 <view class='juti_address'>维度： {{ school_lat }}</view>
 <view class='juti_address'>具体地址： {{ school_address }}</view>
 </view>
+
 </view>
 </view>
 

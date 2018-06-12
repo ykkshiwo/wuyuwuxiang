@@ -14,6 +14,7 @@ Page({
     s_height: 0,
     yuliu_w: 0,
     yuliu_h: 0,
+    is_x_yj: 0,
   },
 
   /**
@@ -45,58 +46,86 @@ Page({
       },
     })
 
-    console.log(options.home_address, options.school_address)
     this.setData({
-      home_long: options.home_long,
-      home_lat: options.home_lat,
-      home_address: options.home_address,
-      school_long: options.school_long,
-      school_lat: options.school_lat,
-      school_address: options.school_address,
-      To: options.To,
+      is_x_yj: options.is_x_yj
     })
+    console.log(typeof(this.data.is_x_yj))
 
-    var x_1 = this.longToZB(this.data.home_long, this.data.s_width)
-    var y_1 = this.latToZB(this.data.home_lat, this.data.s_height)
-    var x_2 = this.longToZB(this.data.school_long, this.data.s_width)
-    var y_2 = this.latToZB(this.data.school_lat, this.data.s_height)
-
-    var y_middle = ( y_1 - y_2 )/2 + y_2
-    var x_middle = ( x_2 - x_1 )/2 + x_1
-
-    var x_pian_ = Math.sqrt( (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2) ) * 0.5
-    // console.log("look: ", x_pian_)
-
-    var x_pian = x_pian_ * 0.75
-    var y_pian = ( Math.abs(x_2) - Math.abs(x_1) ) * x_pian / ( Math.abs(y_1) - Math.abs(y_2) )
-
-    if ( (y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1) ){
-      var x_anchor = x_middle + x_pian
-      var y_anchor = y_middle + y_pian
+    wx.showLoading({
+      title: '读取数据···',
+    })
+    if(this.data.is_x_yj === '1'){
+      this.setData({
+        home_long: options.home_long,
+        home_lat: options.home_lat,
+        citys: wx.getStorageSync('citys'),
+        zuobiao: wx.getStorageSync('zuobiao'),
+      })
+      console.log("citys: ", this.data.citys)
+      console.log("zuobiao: ", this.data.zuobiao)
     }
     else{
+      this.setData({
+        home_long: options.home_long,
+        home_lat: options.home_lat,
+        home_address: options.home_address,
+        school_long: options.school_long,
+        school_lat: options.school_lat,
+        school_address: options.school_address,
+        To: options.To,
+      })
+
+      var xy_anchor = this.anchor(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat)
+      console.log("xy_anchor: ", xy_anchor)
+      this.setData({
+        x_anchor: xy_anchor[0],
+        y_anchor: xy_anchor[1]
+      })
+
+      var dis = d.getDistance(this.data.home_lat, this.data.home_long, this.data.school_lat, this.data.school_long)
+      // console.log( "distance: ", dis)
+      this.setData({
+        dis: dis
+      })
+    }
+    wx.hideLoading()
+  },
+
+  anchor: function (long_1, lat_1, long_2, lat_2) {
+    // console.log(long_1, lat_1, long_2, lat_2)
+    var x_1 = this.longToZB(long_1, this.data.s_width)
+    var y_1 = this.latToZB(lat_1, this.data.s_height)
+    var x_2 = this.longToZB(long_2, this.data.s_width)
+    var y_2 = this.latToZB(lat_2, this.data.s_height)
+    // console.log(x_1,y_1)
+    var y_middle = (y_1 - y_2) / 2 + y_2
+    var x_middle = (x_2 - x_1) / 2 + x_1
+
+    var x_pian_ = Math.sqrt((x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2)) * 0.5
+    // console.log("look: ", x_pian_)
+    // console.log("x_pain: ",x_pian)
+    var x_pian = x_pian_ * 0.75
+    var y_pian = (Math.abs(x_2) - Math.abs(x_1)) * x_pian / (Math.abs(y_1) - Math.abs(y_2))
+    // console.log("y_pain: ", y_pian)
+    if ((y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1)) {
+      var x_anchor = x_middle + x_pian
+      var y_anchor = y_middle + y_pian
+      // console.log(x_anchor)
+      return [x_anchor,y_anchor]
+    }
+    else {
       var x_anchor = x_middle - x_pian
       var y_anchor = y_middle - y_pian
+      // console.log(x_anchor)
+      return [x_anchor, y_anchor]
     }
-
-    this.setData({
-      x_anchor: x_anchor,
-      y_anchor: y_anchor
-    })
-
-    var dis = d.getDistance(this.data.home_lat, this.data.home_long, this.data.school_lat, this.data.school_long)
-    // console.log( "distance: ", dis)
-    this.setData({
-      dis: dis
-    })
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
+    // console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
     wx.showLoading({
       title: '绘制中······',
     })
@@ -122,37 +151,94 @@ Page({
     }
     context.stroke()
 
-    context.beginPath()
-    context.setStrokeStyle("red")
-    context.setLineWidth(1)
-    // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
-    context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
-    context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
-    context.stroke()
+    // context.beginPath()
+    // context.setStrokeStyle("red")
+    // context.setLineWidth(1)
+    // // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
+    // context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
+    // context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+    // context.stroke()
 
-    context.beginPath()
-    context.setStrokeStyle("yellow")
-    context.setLineWidth(1)
-    context.setLineDash([2, 2], 10)
-    context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-    context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
-    context.stroke()
+    // context.beginPath()
+    // context.setStrokeStyle("yellow")
+    // context.setLineWidth(1)
+    // context.setLineDash([2, 2], 10)
+    // context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+    // context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+    // context.stroke()
+    if(this.data.is_x_yj === '1'){
+      // var anchor  = this.anchor(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat)
+      console.log("多曲线作图")
+      context.beginPath()
+      context.setStrokeStyle("red")
+      context.setLineWidth(1)
+      var zuobiao = this.data.zuobiao
+      for (var i = 0; i < zuobiao.length; i++) {
+        console.log("选择城市坐标： ", zuobiao[i])
+        var anchor = this.anchor(this.data.home_long, this.data.home_lat, zuobiao[i][0], zuobiao[i][1])
+        context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+        // context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+        context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+        context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 2, 0, 2 * Math.PI)
+      }
+      // for (var v of citys){
+      //   console.log("第n根曲线")
+      //   var anchor = this.anchor(this.data.home_long, this.data.home_lat, v[0], v[1])
+      //   context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+      //   context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(v[0], this.data.s_width), this.latToZB(v[1], this.data.s_height))
+      // }
+      context.stroke()
+    }
+    else{
+      context.beginPath()
+      context.setStrokeStyle("red")
+      context.setLineWidth(1)
+      // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
+      context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+      context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+      context.stroke()
 
-    context.beginPath()
-    context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 2, 0, 2 * Math.PI)
-    context.setFillStyle('red')
-    context.fill()
+      context.beginPath()
+      context.setStrokeStyle("yellow")
+      context.setLineWidth(1)
+      context.setLineDash([2, 2], 10)
+      context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+      context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
+      context.stroke()
 
-    context.beginPath()
-    context.arc(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height), 2, 0, 2 * Math.PI)
-    context.setFillStyle('blue')
-    context.fill()
+      context.beginPath()
+      context.arc(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+      context.setFillStyle('blue')
+      context.fill()
+
+      context.beginPath()
+      context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+      context.setFillStyle('red')
+      context.fill()
+
+      context.setFontSize(16)
+      context.setFillStyle('green')
+      context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+      context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
+      context.stroke()
+    }
+
+
+    // context.beginPath()
+    // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+    // context.setFillStyle('red')
+    // context.fill()
+
+    // context.beginPath()
+    // context.arc(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height), 2, 0, 2 * Math.PI)
+    // context.setFillStyle('blue')
+    // context.fill()
 
     context.beginPath()
     context.setFontSize(20)
     context.setFillStyle('#00FFFF')
     context.font = "normal small-caps 50 22px Arial"
-    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.10)
+    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.035)
     context.stroke()
 
     try{
@@ -164,29 +250,13 @@ Page({
       console.log(err)
     }
 
-    context.setFontSize(16)
-    context.setFillStyle('green')
-    context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
-    context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
-    context.stroke()
+    // context.setFontSize(16)
+    // context.setFillStyle('green')
+    // context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+    // context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
+    // context.stroke()
 
     context.drawImage('../../images/erweima.png',0.05 * this.data.s_width, 0.57 * this.data.s_height, 132, 132)
-
-    // try{
-    //   var avatarurl_width = 80;    //绘制的头像宽度
-    //   var avatarurl_heigth = 80;   //绘制的头像高度
-    //   var avatarurl_x = 0.05*this.data.s_width;   //绘制的头像在画布上的位置
-    //   var avatarurl_y = 0.4*this.data.s_height;   //绘制的头像在画布上的位置
-    //   console.log(avatarurl_heigth)
-    //   context.beginPath()
-    //   context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false)
-    //   context.clip()
-    //   console.log(app.globalData.userInfo.avatarUrl)
-    //   context.drawImage(app.globalData.userInfo.avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
-    // }
-    // catch(err){
-    //   console.log(err)
-    // }
 
     context.draw()
 

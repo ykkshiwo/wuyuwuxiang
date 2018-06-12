@@ -1,4 +1,4 @@
-exports.only = function unique(array) {
+exports.unique = function (array) {
   var n = {}, r = [], len = array.length, val, type;
   for (var i = 0; i < array.length; i++) {
     val = array[i];
