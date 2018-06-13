@@ -23,7 +23,7 @@ Page({
     home_lat: '',
     home_long: '点击选择地点',
     home_address: '',
-    is_x_yj: false,
+    is_x_yj: true,
     region: ['浙江省', '杭州市'],
     customItem: '全部',
     allCity: '吾乡->',

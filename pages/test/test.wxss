@@ -16,15 +16,33 @@
 }
 
 .provices_citys{
-
+  border: 3rpx solid red;
+  display: flex;
+  flex-direction: row;
 }
 
 .have_choose_citys{
-
+  border: 3rpx solid black;
 }
 
 .button_clear_ok{
-  
+  border: 3rpx solid black;
+}
+
+.provices{
+  border: 3rpx solid blue;
+  width: 30%;
+}
+
+.citys_{
+  border: 3rpx solid yellow;
+  width: 70%;
+}
+
+.test_citys{
+  border: 3rpx solid blue;
+  width: 30%;
+  float: left;
 }
 
 .page{

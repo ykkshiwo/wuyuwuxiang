@@ -59,10 +59,24 @@
 
 <view wx:if="{{ is_x_yj }}" class='citys_xuanzhe'>
   <view class='provices_citys'>
+    <view class='provices'>
+      <view>1</view>
+      <view>2</view>
+      <view>3</view>
+    </view>
+    <view class='citys_'>
+      <view class='test_citys'>1</view>
+      <view class='test_citys'>2</view>
+      <view class='test_citys'>3</view>
+      <view class='test_citys'>4</view>
+      <view class='test_citys'>5</view>
+    </view>
   </view>
   <view class='have_choose_citys'>
+  okde
   </view>
   <view class='button_clear_ok'>
+  go 
   </view>
 </view>
 
