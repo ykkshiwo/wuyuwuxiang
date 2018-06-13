@@ -1,8 +1,15 @@
-<view class='page'>
+<view class='all'>
 
+<button class="kf_button" open-type="contact" session-from="weapp">
+    <image class="kf_image" src="../../images/kefu.png"></image>
+</button> 
+
+<view class='page'>
+<!-- <view class='home' catchtap='xuanLocation'> -->
+<!-- <text class='home_text'>家</text> -->
+<!-- </view> --> 
 <view class='ok'>
 <view class='bacheng'>
-
 <view class='home'>
 <radio-group class="radio-group" bindchange="radioChange">
   <view class='radio'>
@@ -10,7 +17,6 @@
   </view>
 </radio-group>
 </view>
-
 <view class='home_address' catchtap='xuanLocationHome'>
 <view class='juti_address'>经度： {{ home_long }}</view>
 <view class='juti_address'>维度： {{ home_lat }}</view>
@@ -28,16 +34,7 @@
 </view>
 
 <view wx:if = "{{ is_x_yj }}" class='citys'>
-  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-    <view class="picker">
-      选择城市后点击添加：
-      <view class='xuanzhe-citys'>{{region[0]}}，{{region[1]}}</view>
-    </view>
-  </picker>
-  <button catchtap='tianJia' type='primary'>添加</button>
-  <view class='dis-citys'>
-    <text class='dis-citys-name'>{{ allCity }}</text>
-  </view>
+
 </view>
 
 <view wx:else class='home_address' catchtap='xuanLocationSchool'>
@@ -50,7 +47,40 @@
 </view>
 
 <view class='button_w'>
+<view class='button' >
 <button plain='true' bindtap='produce' type='primary'>生成图像</button>
+</view>
+</view>
+</view>
+
+<view wx:if="{{ display_pc }}" class='citys_xuanzhe'>
+  <view class='provices_citys'>
+    <scroll-view class='provices' scroll-y='true'>
+      <view wx:for="{{provices}}">
+        <view id="{{ item }}" class='provice' catchtap='chooseP'>{{ item }}</view>
+      </view>
+    </scroll-view>
+
+    
+    <scroll-view class='citys_' scroll-y='true'>
+      <view wx:for="{{now_citys}}">
+        <view id="{{ item }}" class='test_citys' catchtap='chooseC'>{{ item }}</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='have_choose_citys_'>
+  <scroll-view class='have_choose_citys' scroll-y='true'>
+  {{ allCity }}
+  </scroll-view>
+  </view>
+  <view class='button_clear_ok'>
+    <view class='clear' catchtap='clear'>
+        清除
+    </view>
+    <view class='confirm'  catchtap='confirm'>
+        确定
+    </view>
+  </view>
 </view>
 
 </view>
