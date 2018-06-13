@@ -13,8 +13,8 @@ Page({
       { name: '的大学', value: '我的大学' },
       { name: '工作的地方', value: '工作的地方'},
       { name: '即将去的远方', value: '即将到达的远方' },
-      { name: '想到达的远方', value: '想到达的远方'},
-      { name: '已经到达的远方', value: '已经到达的远方'},
+      { name: '想到达的远方(选择多个城市)', value: '想到达的远方'},
+      { name: '已经到达的远方（选择多个城市）', value: '已经到达的远方'},
     ],
     home: { name: '家', value: '家', checked: true},
     school_lat: '',
@@ -26,7 +26,7 @@ Page({
     is_x_yj: false,
     region: ['浙江省', '杭州市'],
     customItem: '全部',
-    allCity: '',
+    allCity: '吾乡->',
     allCity_unique: '',
   },
 
@@ -117,14 +117,41 @@ Page({
 
   produce: function(){
     if(this.data.is_x_yj){
-      this.tiJiao()
-      wx.navigateTo({
-        url: "/pages/canvas/canvas?is_x_yj=" + 1 +
-        "&home_long=" + this.data.home_long +
-        "&home_lat=" + this.data.home_lat,
-        success: function () {
-        }
-      })
+      if (this.data.home_lat){
+        this.tiJiao()
+        wx.navigateTo({
+          url: "/pages/canvas/canvas?is_x_yj=" + 1 +
+          "&home_long=" + this.data.home_long +
+          "&home_lat=" + this.data.home_lat +
+          "&To=" + this.data.To,
+          success: function () {
+          }
+        })
+      }
+      
+      else{
+        var that= this
+        wx.showModal({
+          title: '提示',
+          content: '您未选择家的地理数据，将导致绘图出现错误，继续点击确定，重选点击取消',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              that.tiJiao()
+              wx.navigateTo({
+                url: "/pages/canvas/canvas?is_x_yj=" + 1 +
+                "&home_long=" + this.data.home_long +
+                "&home_lat=" + this.data.home_lat +
+                "&To=" + this.data.To,
+                success: function () {
+                }
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
     }
     else{
       if (this.data.home_lat && this.data.school_lat) {
@@ -173,8 +200,13 @@ Page({
   },
 
   tianJia: function () {
-    var allCity = this.data.allCity + ';' + this.data.region[1]
-    console.log(allCity)
+    if (this.data.region[1] === '全部'){
+      var r = ''
+    }
+    else{
+      var r = this.data.region[1]
+    }
+    var allCity = this.data.allCity + ';' + r
     this.setData({
       allCity: allCity,
     })

@@ -60,6 +60,7 @@ Page({
         home_lat: options.home_lat,
         citys: wx.getStorageSync('citys'),
         zuobiao: wx.getStorageSync('zuobiao'),
+        To: options.To,
       })
       console.log("citys: ", this.data.citys)
       console.log("zuobiao: ", this.data.zuobiao)
@@ -92,7 +93,7 @@ Page({
   },
 
   anchor: function (long_1, lat_1, long_2, lat_2) {
-    // console.log(long_1, lat_1, long_2, lat_2)
+    console.log(long_1, lat_1, long_2, lat_2)
     var x_1 = this.longToZB(long_1, this.data.s_width)
     var y_1 = this.latToZB(lat_1, this.data.s_height)
     var x_2 = this.longToZB(long_2, this.data.s_width)
@@ -106,17 +107,20 @@ Page({
     // console.log("x_pain: ",x_pian)
     var x_pian = x_pian_ * 0.75
     var y_pian = (Math.abs(x_2) - Math.abs(x_1)) * x_pian / (Math.abs(y_1) - Math.abs(y_2))
-    // console.log("y_pain: ", y_pian)
+    if (Math.abs(y_pian) > 400){
+      var y_pian = 400 * y_pian/Math.abs(y_pian)
+    }
+    console.log("y_pain: ", y_pian, x_pian, )
     if ((y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1)) {
       var x_anchor = x_middle + x_pian
       var y_anchor = y_middle + y_pian
-      // console.log(x_anchor)
+      console.log(x_anchor, y_anchor)
       return [x_anchor,y_anchor]
     }
     else {
       var x_anchor = x_middle - x_pian
       var y_anchor = y_middle - y_pian
-      // console.log(x_anchor)
+      console.log(x_anchor, y_anchor)
       return [x_anchor, y_anchor]
     }
   },
@@ -135,7 +139,7 @@ Page({
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
     context.setFillStyle('#00EE00')
-    context.fillRect(0.05 * this.data.s_width - 2, 0.57 * this.data.s_height - 2, 136, 136)
+    context.fillRect(0.05 * this.data.s_width - 2, 0.57 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
     context.beginPath()
     context.setStrokeStyle("#00EE00")
@@ -151,21 +155,6 @@ Page({
     }
     context.stroke()
 
-    // context.beginPath()
-    // context.setStrokeStyle("red")
-    // context.setLineWidth(1)
-    // // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 12, 0, 2 * Math.PI)
-    // context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height) )
-    // context.quadraticCurveTo(this.data.x_anchor, this.data.y_anchor, this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
-    // context.stroke()
-
-    // context.beginPath()
-    // context.setStrokeStyle("yellow")
-    // context.setLineWidth(1)
-    // context.setLineDash([2, 2], 10)
-    // context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-    // context.lineTo(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height))
-    // context.stroke()
     if(this.data.is_x_yj === '1'){
       // var anchor  = this.anchor(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat)
       console.log("多曲线作图")
@@ -175,17 +164,57 @@ Page({
       var zuobiao = this.data.zuobiao
       for (var i = 0; i < zuobiao.length; i++) {
         console.log("选择城市坐标： ", zuobiao[i])
-        var anchor = this.anchor(this.data.home_long, this.data.home_lat, zuobiao[i][0], zuobiao[i][1])
+        //var anchor = this.anchor(this.data.home_long, this.data.home_lat, zuobiao[i][0], zuobiao[i][1])
         context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-        // context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+        //context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
         context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
-        context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 2, 0, 2 * Math.PI)
+        context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
       }
-      // for (var v of citys){
-      //   console.log("第n根曲线")
-      //   var anchor = this.anchor(this.data.home_long, this.data.home_lat, v[0], v[1])
-      //   context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-      //   context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(v[0], this.data.s_width), this.latToZB(v[1], this.data.s_height))
+      
+      context.setFontSize(16)
+      context.setFillStyle('green')
+      context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+      var citys = this.data.citys
+      citys.splice(0, 1)
+      console.log(citys)
+      var citys_string = citys.join(',')
+      console.log(citys_string)
+      var first_ = parseInt(this.data.s_width * 0.90 / 16)
+      console.log(first_)
+      var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
+      console.log(second__)
+      if(citys_string.length < first_){
+        console.log("单行")
+        for (var i = 0; i < citys_string.length; i++) {
+          context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
+          }
+      }
+      else{
+        console.log("多行")
+        for (var i = 0; i < first_; i++) {
+          context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
+        }
+        var second_to = citys_string.slice(first_)
+        console.log(second_to)
+        var jihang = parseInt(second_to.length/second__) + 1
+        console.log(jihang)
+        for (var i = 0; i < jihang; i++){
+          console.log(i)
+          for (var j = 0; j < second__; j++){
+            console.log(j)
+            context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, (0.55 + i * 0.03) * this.data.s_height)
+          }
+        }
+      }
+      // var first_ = parseInt((this.data.s_width * 0.95 - 32) / 48)
+      // console.log("first_: ", first_)
+      // for(var i = 0; i< citys.length; i++){
+      //   if(i <= first_){
+      //     context.fillText(citys[i], 0.05 * this.data.s_width + i * 50, 0.55 * this.data.s_height)
+      //   }
+      //   else if(i>first_){
+      //     context.fillText(citys[i], 136 + 0.05 * this.data.s_width + (i-first_ - 1) * 50, 0.58 * this.data.s_height)
+      //   }
       // }
       context.stroke()
     }
@@ -256,7 +285,7 @@ Page({
     // context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
     // context.stroke()
 
-    context.drawImage('../../images/erweima.png',0.05 * this.data.s_width, 0.57 * this.data.s_height, 132, 132)
+    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, 0.57 * this.data.s_height, this.data.s_width * 0.25, this.data.s_width * 0.25)
 
     context.draw()
 

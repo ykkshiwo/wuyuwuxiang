@@ -7,7 +7,7 @@
 <view class='home'>
 <radio-group class="radio-group" bindchange="radioChange">
   <view class='radio'>
-    <radio value="{{home.name}}" checked="{{home.checked}}"/>{{home.value}}
+    <radio value="{{home.name}}" checked="{{home.checked}}"/>{{home.name}}
   </view>
 </radio-group>
 </view>
@@ -21,7 +21,7 @@
 <radio-group class="radio-group" bindchange="radioChange">
   <label class="radio" wx:for="{{items}}">
   <view class='radio'>
-    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
   </view>
   </label>
 </radio-group>
@@ -30,11 +30,11 @@
 <view wx:if = "{{ is_x_yj }}" class='citys'>
   <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
     <view class="picker">
-      选择后点击添加：
+      选择城市后点击添加：
       <view class='xuanzhe-citys'>{{region[0]}}，{{region[1]}}</view>
     </view>
   </picker>
-  <button catchtap='tianJia'>添加</button>
+  <button catchtap='tianJia' type='primary'>添加</button>
   <view class='dis-citys'>
   <text class='dis-citys-name'>{{ allCity }}</text>
   </view>

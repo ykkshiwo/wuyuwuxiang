@@ -88,3 +88,8 @@ dis-citys{
 .dis-citys-name{
   color: blue;
 }
+
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}
