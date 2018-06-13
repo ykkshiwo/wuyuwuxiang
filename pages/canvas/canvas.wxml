@@ -1,6 +1,6 @@
 <!--pages/canvas/canvas.wxml-->
 <view class='all-page'>
-<canvas style='width: 100%; height: 100%;' class='canvas' canvas-id="firstCanvas"></canvas>
+<canvas style='width: 100%; height: 90%;' class='canvas' canvas-id="firstCanvas"></canvas>
 
 <view class='button_w'>
     <view class='reset'>

@@ -1,0 +1,141 @@
+/* pages/test/test.wxss */
+/* pages/xuanzhe/xuanzhe.wxss */
+.all{
+  height: 100%;
+  border: 3rpx solid green;
+}
+
+.citys_xuanzhe{
+  border: 3rpx solid black;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  /* background-color: black; */
+  width: 80%;
+  height: 80%;
+}
+
+.provices_citys{
+  border: 3rpx solid red;
+  display: flex;
+  flex-direction: row;
+}
+
+.have_choose_citys{
+  border: 3rpx solid black;
+}
+
+.button_clear_ok{
+  border: 3rpx solid black;
+}
+
+.provices{
+  border: 3rpx solid blue;
+  width: 30%;
+}
+
+.citys_{
+  border: 3rpx solid yellow;
+  width: 70%;
+}
+
+.test_citys{
+  border: 3rpx solid blue;
+  width: 30%;
+  float: left;
+}
+
+.page{
+  /* border: 1rpx solid red; */
+  /* padding-left: 5rpx; */
+  /* padding-right: 5rpx; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  height: 100%;
+  width: 100%;
+   border: 3rpx solid red; 
+  background-color: #EBEBEB;
+}
+
+.home{
+  /* border: 1rpx solid gray; */
+  margin-top: 5%;
+}
+
+.home_text{
+  color: blue;
+  font-family: "Times New Roman";
+  font-size: 30rpx;
+  /* border: 1rpx solid blue */
+}
+
+.home_address{
+  /* border: 1rpx solid yellow; */
+  margin-top: 20rpx;
+}
+
+.juti_address{
+  /* border: 1rpx solid greenyellow; */
+  margin-top: 5rpx;
+}
+
+.xuanzhe{
+  /* border: 1rpx solid gray; */
+  margin-top: 10%;
+}
+
+.radio{
+  margin-top: 8rpx;
+}
+
+.bacheng{
+  height: 90%;
+  /* border: 1rpx solid yellowgreen; */
+}
+
+.button{
+  /* width: 98%;
+  height: 10%; */
+  /* border: 1rpx solid red;  */
+  padding-top: 5rpx;
+  /* align-items: center; */
+}
+
+.button_w{
+  width: 98%;
+  height: 10%;
+  align-items: center;
+}
+
+
+.ok{
+  width: 100%;
+  /* border: 1rpx solid red; */
+  height: 90%;
+  /* padding-left: 18rpx;
+  padding-right: 28rpx; */
+  padding: 20rpx;
+}
+
+.xuanzhe-citys{
+  margin-top: 8rpx;
+}
+
+.citys{
+  margin-top: 8rpx;
+   border: 1rpx solid red;
+}
+
+dis-citys{
+  margin-top: 3rpx;
+}
+
+.dis-citys-name{
+  color: blue;
+}
+
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}

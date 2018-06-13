@@ -78,5 +78,13 @@ dis-citys{
 
 .dis-citys-name{
   color: blue;
+<<<<<<< HEAD
    border: 1rpx solid blueviolet;
+=======
+}
+
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+>>>>>>> bbf07a90410b554c2abc67dac16893ff2302c615
 }

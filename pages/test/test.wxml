@@ -1,8 +1,10 @@
+<view class='all'>
 <view class='page'>
-
+<!-- <view class='home' catchtap='xuanLocation'> -->
+<!-- <text class='home_text'>家</text> -->
+<!-- </view> -->
 <view class='ok'>
 <view class='bacheng'>
-
 <view class='home'>
 <radio-group class="radio-group" bindchange="radioChange">
   <view class='radio'>
@@ -10,7 +12,6 @@
   </view>
 </radio-group>
 </view>
-
 <view class='home_address' catchtap='xuanLocationHome'>
 <view class='juti_address'>经度： {{ home_long }}</view>
 <view class='juti_address'>维度： {{ home_lat }}</view>
@@ -36,7 +37,7 @@
   </picker>
   <button catchtap='tianJia' type='primary'>添加</button>
   <view class='dis-citys'>
-    <text class='dis-citys-name'>{{ allCity }}</text>
+  <text class='dis-citys-name'>{{ allCity }}</text>
   </view>
 </view>
 
@@ -50,7 +51,33 @@
 </view>
 
 <view class='button_w'>
+<view class='button' >
 <button plain='true' bindtap='produce' type='primary'>生成图像</button>
+</view>
+</view>
+</view>
+
+<view wx:if="{{ is_x_yj }}" class='citys_xuanzhe'>
+  <view class='provices_citys'>
+    <view class='provices'>
+      <view>1</view>
+      <view>2</view>
+      <view>3</view>
+    </view>
+    <view class='citys_'>
+      <view class='test_citys'>1</view>
+      <view class='test_citys'>2</view>
+      <view class='test_citys'>3</view>
+      <view class='test_citys'>4</view>
+      <view class='test_citys'>5</view>
+    </view>
+  </view>
+  <view class='have_choose_citys'>
+  okde
+  </view>
+  <view class='button_clear_ok'>
+  go 
+  </view>
 </view>
 
 </view>

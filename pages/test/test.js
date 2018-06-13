@@ -11,19 +11,19 @@ Page({
   data: {
     items: [
       { name: '我的大学', value: '的大学' },
-      { name: '工作的地方', value: '工作的地方'},
+      { name: '工作的地方', value: '工作的地方' },
       { name: '即将去的远方', value: '即将到达的远方' },
-      { name: '想到达的远方(选择多个城市)', value: '想到达的远方'},
-      { name: '已经到达的远方（选择多个城市）', value: '已经到达的远方'},
+      { name: '想到达的远方(选择多个城市)', value: '想到达的远方' },
+      { name: '已经到达的远方（选择多个城市）', value: '已经到达的远方' },
     ],
-    home: { name: '家', value: '家', checked: true},
+    home: { name: '家', value: '家', checked: true },
     school_lat: '',
     school_long: '点击选择地点',
     school_address: '',
     home_lat: '',
     home_long: '点击选择地点',
     home_address: '',
-    is_x_yj: false,
+    is_x_yj: true,
     region: ['浙江省', '杭州市'],
     customItem: '全部',
     allCity: '吾乡->',
@@ -33,12 +33,12 @@ Page({
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
     var v = e.detail.value
-    if (v === "想到达的远方" || v === "已经到达的远方"){
+    if (v === "想到达的远方" || v === "已经到达的远方") {
       this.setData({
         is_x_yj: true,
       })
     }
-    else{
+    else {
       this.setData({
         is_x_yj: false,
       })
@@ -48,7 +48,7 @@ Page({
     })
   },
 
-  xuanLocationHome: function(){
+  xuanLocationHome: function () {
     console.log("开始家选择地点")
     var that = this
     wx.chooseLocation({
@@ -63,7 +63,7 @@ Page({
           home_address: address_
         })
       },
-      fail: function(){
+      fail: function () {
         wx.openSetting({
           success: function (res) {
             console.log(res.authSetting)
@@ -74,34 +74,34 @@ Page({
   },
 
   xuanLocationSchool: function () {
-      console.log("开始学校选择地点")
-      var that = this
-      wx.chooseLocation({
-        success: function (res) {
-          console.log(res)
-          var long_ = res.longitude
-          var lat_ = res.latitude
-          var address_ = res.address
-          that.setData({
-            school_lat: lat_,
-            school_long: long_,
-            school_address: address_
-          })
-        },
-        fail: function () {
-          wx.openSetting({
-            success: function (res) {
-              console.log(res.authSetting)
-            }
-          })
-        }
-      })
-  },
-
-  xuanzheDidian: function(lat, long, address ){
+    console.log("开始学校选择地点")
     var that = this
     wx.chooseLocation({
-      success: function(res) {
+      success: function (res) {
+        console.log(res)
+        var long_ = res.longitude
+        var lat_ = res.latitude
+        var address_ = res.address
+        that.setData({
+          school_lat: lat_,
+          school_long: long_,
+          school_address: address_
+        })
+      },
+      fail: function () {
+        wx.openSetting({
+          success: function (res) {
+            console.log(res.authSetting)
+          }
+        })
+      }
+    })
+  },
+
+  xuanzheDidian: function (lat, long, address) {
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
         console.log(res)
         var long_ = res.longitude
         var lat_ = res.latitude
@@ -115,40 +115,22 @@ Page({
     })
   },
 
-  produce: function(){
-    if(this.data.is_x_yj){
-<<<<<<< HEAD
+  produce: function () {
+    if (this.data.is_x_yj) {
       if (this.data.home_lat) {
-=======
-      if (this.data.home_lat){
->>>>>>> bbf07a90410b554c2abc67dac16893ff2302c615
         this.tiJiao()
         wx.navigateTo({
           url: "/pages/canvas/canvas?is_x_yj=" + 1 +
           "&home_long=" + this.data.home_long +
-<<<<<<< HEAD
-          "&home_lat=" + this.data.home_lat,
-=======
           "&home_lat=" + this.data.home_lat +
           "&To=" + this.data.To,
->>>>>>> bbf07a90410b554c2abc67dac16893ff2302c615
           success: function () {
           }
         })
       }
-<<<<<<< HEAD
-      else{
+
+      else {
         var that = this
-        wx.showModal({
-          title: '提示',
-          content: '您未选择家的地理数据，将导致绘图出现错误，请点击重选取消或确定。',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-=======
-      
-      else{
-        var that= this
         wx.showModal({
           title: '提示',
           content: '您未选择家的地理数据，将导致绘图出现错误，继续点击确定，重选点击取消',
@@ -164,7 +146,6 @@ Page({
                 success: function () {
                 }
               })
->>>>>>> bbf07a90410b554c2abc67dac16893ff2302c615
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
@@ -172,7 +153,7 @@ Page({
         })
       }
     }
-    else{
+    else {
       if (this.data.home_lat && this.data.school_lat) {
         console.log("go")
         this.tiaoZhuan(this)
@@ -196,19 +177,19 @@ Page({
   },
 
 
-  tiaoZhuan: function(t){
-      wx.navigateTo({
-        url: "/pages/canvas/canvas?home_long=" + t.data.home_long +
-        "&home_lat=" + t.data.home_lat +
-        "&is_x_yj=" + 0 +
-        "&home_address=" + t.data.home_address +
-        "&school_lat=" + t.data.school_lat +
-        "&school_long=" + t.data.school_long +
-        "&school_address=" + t.data.school_address +
-        "&To=" + t.data.To,
-        success: function () {
-        }
-      })
+  tiaoZhuan: function (t) {
+    wx.navigateTo({
+      url: "/pages/canvas/canvas?home_long=" + t.data.home_long +
+      "&home_lat=" + t.data.home_lat +
+      "&is_x_yj=" + 0 +
+      "&home_address=" + t.data.home_address +
+      "&school_lat=" + t.data.school_lat +
+      "&school_long=" + t.data.school_long +
+      "&school_address=" + t.data.school_address +
+      "&To=" + t.data.To,
+      success: function () {
+      }
+    })
   },
 
   bindRegionChange: function (e) {
@@ -219,10 +200,10 @@ Page({
   },
 
   tianJia: function () {
-    if (this.data.region[1] === '全部'){
+    if (this.data.region[1] === '全部') {
       var r = ''
     }
-    else{
+    else {
       var r = this.data.region[1]
     }
     var allCity = this.data.allCity + ';' + r
@@ -267,7 +248,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -281,34 +262,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
