@@ -197,12 +197,16 @@ Page({
         var second_to = citys_string.slice(first_)
         console.log(second_to)
         var jihang = parseInt(second_to.length/second__) + 1
-        console.log(jihang)
+        console.log("小的有几行： ",jihang)
+        var l=0
         for (var i = 0; i < jihang; i++){
-          console.log(i)
+          console.log("第",i,"行")
           for (var j = 0; j < second__; j++){
             console.log(j)
-            context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, (0.55 + i * 0.03) * this.data.s_height)
+            if (second_to[l]){
+              context.fillText(second_to[l], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + i * 0.03) * this.data.s_height) 
+              l += 1
+            }
           }
         }
       }
@@ -267,7 +271,7 @@ Page({
     context.setFontSize(20)
     context.setFillStyle('#00FFFF')
     context.font = "normal small-caps 50 22px Arial"
-    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.035)
+    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.05)
     context.stroke()
 
     try{
@@ -278,12 +282,6 @@ Page({
     catch(err){
       console.log(err)
     }
-
-    // context.setFontSize(16)
-    // context.setFillStyle('green')
-    // context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
-    // context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
-    // context.stroke()
 
     context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, 0.57 * this.data.s_height, this.data.s_width * 0.25, this.data.s_width * 0.25)
 

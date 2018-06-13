@@ -10,7 +10,7 @@ Page({
    */
   data: {
     items: [
-      { name: '的大学', value: '我的大学' },
+      { name: '我的大学', value: '的大学' },
       { name: '工作的地方', value: '工作的地方'},
       { name: '即将去的远方', value: '即将到达的远方' },
       { name: '想到达的远方(选择多个城市)', value: '想到达的远方'},
