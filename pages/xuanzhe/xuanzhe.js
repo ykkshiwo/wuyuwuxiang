@@ -117,14 +117,30 @@ Page({
 
   produce: function(){
     if(this.data.is_x_yj){
-      this.tiJiao()
-      wx.navigateTo({
-        url: "/pages/canvas/canvas?is_x_yj=" + 1 +
-        "&home_long=" + this.data.home_long +
-        "&home_lat=" + this.data.home_lat,
-        success: function () {
-        }
-      })
+      if (this.data.home_lat) {
+        this.tiJiao()
+        wx.navigateTo({
+          url: "/pages/canvas/canvas?is_x_yj=" + 1 +
+          "&home_long=" + this.data.home_long +
+          "&home_lat=" + this.data.home_lat,
+          success: function () {
+          }
+        })
+      }
+      else{
+        var that = this
+        wx.showModal({
+          title: '提示',
+          content: '您未选择家的地理数据，将导致绘图出现错误，请点击重选取消或确定。',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
     }
     else{
       if (this.data.home_lat && this.data.school_lat) {
