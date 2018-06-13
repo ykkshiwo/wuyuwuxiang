@@ -139,7 +139,7 @@ Page({
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
     context.setFillStyle('#00EE00')
-    context.fillRect(0.05 * this.data.s_width - 2, 0.57 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
+    context.fillRect(0.05 * this.data.s_width - 2, 0.65 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
     context.beginPath()
     context.setStrokeStyle("#00EE00")
@@ -183,33 +183,66 @@ Page({
       console.log(first_)
       var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
       console.log(second__)
-      if(citys_string.length < first_){
-        console.log("单行")
-        for (var i = 0; i < citys_string.length; i++) {
-          context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
-          }
-      }
-      else{
-        console.log("多行")
-        for (var i = 0; i < first_; i++) {
-          context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
-        }
-        var second_to = citys_string.slice(first_)
-        console.log(second_to)
-        var jihang = parseInt(second_to.length/second__) + 1
-        console.log("小的有几行： ",jihang)
-        var l=0
-        for (var i = 0; i < jihang; i++){
-          console.log("第",i,"行")
-          for (var j = 0; j < second__; j++){
-            console.log(j)
-            if (second_to[l]){
-              context.fillText(second_to[l], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + i * 0.03) * this.data.s_height) 
-              l += 1
-            }
+      // 改一下，弄成三行长的
+      var three_long = 4 * first_
+      var l_n = citys_string.slice(0, three_long)
+      var s_n = citys_string.slice(three_long)
+
+      console.log('l_n: ', l_n)
+      console.log('s_n: ', s_n)
+
+      var l = 0
+      for (var i = 0; i < 4; i++) {
+        console.log("第", i, "行")
+        for (var j = 0; j < first_; j++) {
+          console.log(j)
+          if (l_n[l]) {
+            context.fillText(l_n[l], 0.05 * this.data.s_width + j * 16, (0.55 + i * 0.03 ) * this.data.s_height)
+            l += 1
           }
         }
       }
+
+      var s = 0
+      var jihang = parseInt(s_n.length / second__) + 1
+      for (var i = 0; i < jihang; i++) {
+        console.log("第", i, "行")
+        for (var j = 0; j < second__; j++) {
+          console.log(j)
+          if (s_n[s]) {
+            context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + 0.09 + i * 0.03) * this.data.s_height)
+            s += 1
+          }
+        }
+      }
+
+      // if(citys_string.length < first_){
+      //   console.log("单行")
+      //   for (var i = 0; i < citys_string.length; i++) {
+      //     context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
+      //     }
+      // }
+      // else{
+      //   console.log("多行")
+      //   for (var i = 0; i < first_; i++) {
+      //     context.fillText(citys_string[i], 0.05 * this.data.s_width + i * 16, 0.55 * this.data.s_height)
+      //   }
+      //   var second_to = citys_string.slice(first_)
+      //   console.log(second_to)
+      //   var jihang = parseInt(second_to.length/second__) + 1
+      //   console.log("小的有几行： ",jihang)
+      //   var l=0
+      //   for (var i = 0; i < jihang; i++){
+      //     console.log("第",i,"行")
+      //     for (var j = 0; j < second__; j++){
+      //       console.log(j)
+      //       if (second_to[l]){
+      //         context.fillText(second_to[l], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + i * 0.03) * this.data.s_height) 
+      //         l += 1
+      //       }
+      //     }
+      //   }
+      // }
       // var first_ = parseInt((this.data.s_width * 0.95 - 32) / 48)
       // console.log("first_: ", first_)
       // for(var i = 0; i< citys.length; i++){
@@ -283,7 +316,7 @@ Page({
       console.log(err)
     }
 
-    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, 0.57 * this.data.s_height, this.data.s_width * 0.25, this.data.s_width * 0.25)
+    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, 0.65 * this.data.s_height, this.data.s_width * 0.25, this.data.s_width * 0.25)
 
     context.draw()
 
