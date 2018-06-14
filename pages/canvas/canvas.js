@@ -234,10 +234,10 @@ Page({
     }
 
     context.beginPath()
-    context.setFontSize(20)
     context.setFillStyle('#00FFFF')
-    context.font = "normal small-caps 50 22px Arial"
-    context.fillText("吾与吾乡", 0.38 * this.data.s_width, this.data.s_height*0.05)
+    context.setFontSize(8)
+    context.fillText("2018-06-14", 0.05 * this.data.s_width, this.data.s_height * 0.05)
+    context.fillText("由“吾与吾乡”绘制", 0.05 * this.data.s_width, this.data.s_height*0.05 + 8)
     context.stroke()
 
     try{
