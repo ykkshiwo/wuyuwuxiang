@@ -34,12 +34,13 @@ Page({
     allCity: '吾乡->',
     allCity_unique: '',
     display_pc: false,
+    disallCitys: '',
   },
 
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
     var v = e.detail.value
-    if (v === "想到达的远方" || v === "已经到达的远方" || v === "彩色旅途") {
+    if (v === "想到达的远方" || v === "已经到达的远方" || v === "我的彩色旅途") {
       this.setData({
         is_x_yj: true,
         display_pc: true,
@@ -211,8 +212,10 @@ Page({
     var aCity = event.currentTarget.id;
     console.log(aCity)
     var allCity = this.data.allCity + ';' + aCity
+    var disallCitys = allCity.slice(5)
     this.setData({
       allCity: allCity,
+      disallCitys: disallCitys,
     })
   },
 

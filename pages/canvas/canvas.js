@@ -15,6 +15,7 @@ Page({
     yuliu_w: 0,
     yuliu_h: 0,
     is_x_yj: 0,
+    colors: ['#FFFF00', '#FF0000', '#CDAD00', '#C0FF3E', '#9400D3', '#8E8E38', '#00FFFF', '#00EE00', '#0000EE', '#9A32CD'],
   },
 
   /**
@@ -156,20 +157,30 @@ Page({
     context.stroke()
 
     if(this.data.is_x_yj === '1'){
-      if(this.data.To === '彩色旅途'){
-        console.log("彩色旅途")
+      if(this.data.To === '我的彩色旅途'){
+        console.log("我的彩色旅途")
         context.beginPath()
         context.setStrokeStyle("red")
         context.setLineWidth(1)
         var zuobiao = this.data.zuobiao
-        context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-        for( var i = 0; i < zuobiao.length; i++ ){
-          context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
-          context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
+        var ok = zuobiao.unshift([this.data.home_long, this.data.home_lat])
+
+        for( var i = 0; i < ok-1; i++ ){
+          context.beginPath()
+          context.moveTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+          context.lineTo(this.longToZB(zuobiao[i + 1][0], this.data.s_width), this.latToZB(zuobiao[i + 1][1], this.data.s_height))
+          context.setStrokeStyle(this.data.colors[parseInt(10*Math.random())])
+          context.stroke()
+        }
+
+        for (var i = 0; i < ok; i++) {
+          context.beginPath()
+          context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 2, 0, 2 * Math.PI)
+          context.setFillStyle(this.data.colors[parseInt(10 * Math.random())])
+          context.fill()
         }
 
         this.writeCityName(context)
-        context.stroke()
       }
       else{
         console.log("多点多线作图")

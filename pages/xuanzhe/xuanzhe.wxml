@@ -70,7 +70,7 @@
   </view>
   <view class='have_choose_citys_'>
   <scroll-view class='have_choose_citys' scroll-y='true'>
-  {{ allCity }}
+  {{ disallCitys }}
   </scroll-view>
   </view>
   <view class='button_clear_ok'>
