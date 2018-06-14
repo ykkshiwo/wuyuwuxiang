@@ -320,6 +320,7 @@ Page({
   clear: function () {
     this.setData({
       allCity: '吾乡->',
+      disallCitys: '',
     })
   }
 })

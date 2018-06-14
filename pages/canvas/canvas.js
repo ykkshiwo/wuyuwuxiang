@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: '#000000',
-      backgroundColor: '#0A0A0A',
+      backgroundColor: '#000000',
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -136,14 +136,21 @@ Page({
     })
     var context = wx.createCanvasContext('firstCanvas')
 
-    context.setFillStyle('#0A0A0A')
+    // context.setFillStyle('#0A0A0A')
+    // context.fillRect(0, 0, this.data.s_width, this.data.s_height)
+    const grd = context.createLinearGradient(0, 0, 0, this.data.s_height)
+    grd.addColorStop(0, 'black')
+    grd.addColorStop(1, 'gray')
+
+    // Fill with gradient
+    context.setFillStyle(grd)
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
-    context.setFillStyle('#00EE00')
-    context.fillRect(0.05 * this.data.s_width - 2, 0.65 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
+    // context.setFillStyle('#00EE00')
+    // context.fillRect(0.05 * this.data.s_width - 2, 0.72 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
     context.beginPath()
-    context.setStrokeStyle("#00EE00")
+    context.setStrokeStyle("#00F5FF")
     context.setLineWidth(1.5)
     for (var key in map) {
       var p = map[key]
@@ -227,7 +234,7 @@ Page({
       context.fill()
 
       context.setFontSize(16)
-      context.setFillStyle('green')
+      context.setFillStyle('yellow')
       context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
       context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
       context.stroke()
@@ -236,21 +243,22 @@ Page({
     context.beginPath()
     context.setFillStyle('#00FFFF')
     context.setFontSize(8)
-    context.fillText("2018-06-14", 0.05 * this.data.s_width, this.data.s_height * 0.05)
-    context.fillText("由“吾与吾乡”绘制", 0.05 * this.data.s_width, this.data.s_height*0.05 + 8)
+    var now = new Date()
+    context.fillText(parseInt(now.getFullYear()) + '-'+ parseInt(now.getMonth() + 1) + '-' + parseInt(now.getDate()), 0.05 * this.data.s_width, 0.05 * this.data.s_width)
+    context.fillText("由“吾与吾乡”绘制", 0.05 * this.data.s_width, 0.05 * this.data.s_width + 8)
     context.stroke()
 
     try{
       context.setFontSize(22)
-      context.setFillStyle('green')
+      context.setFillStyle('yellow')
       context.fillText(app.globalData.userInfo.nickName, 0.05 * this.data.s_width, 0.49 * this.data.s_height)
-      // context.drawImage(app.globalData.userInfo.avatarUrl, 0.05 * this.data.s_width, 0.51 * this.data.s_height )
+      // context.drawImage(app.globalData.userInfo.avatarUrl, 0.4 * this.data.s_width, 0.1 * this.data.s_width, 0.2 * this.data.s_width, 0.2 * this.data.s_width)
     }
     catch(err){
       console.log(err)
     }
 
-    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, 0.65 * this.data.s_height, this.data.s_width * 0.25, this.data.s_width * 0.25)
+    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, this.data.s_height * 0.72, this.data.s_width * 0.25, this.data.s_width * 0.25)
 
     context.draw()
 
@@ -269,7 +277,7 @@ Page({
 
   writeCityName: function (context){
     context.setFontSize(16)
-    context.setFillStyle('green')
+    context.setFillStyle('#E0FFFF')
     context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
     var citys = this.data.citys
     citys.splice(0, 1)
@@ -281,7 +289,7 @@ Page({
     var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
     console.log(second__)
     // 改一下，弄成三行长的
-    var three_long = 4 * first_
+    var three_long = 6 * first_
     var l_n = citys_string.slice(0, three_long)
     var s_n = citys_string.slice(three_long)
 
@@ -289,7 +297,7 @@ Page({
     console.log('s_n: ', s_n)
 
     var l = 0
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 6; i++) {
       console.log("第", i, "行")
       for (var j = 0; j < first_; j++) {
         console.log(j)
@@ -307,7 +315,7 @@ Page({
       for (var j = 0; j < second__; j++) {
         console.log(j)
         if (s_n[s]) {
-          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + 0.09 + i * 0.03) * this.data.s_height)
+          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.55 + 0.18 + i * 0.03) * this.data.s_height)
           s += 1
         }
       }
@@ -373,6 +381,7 @@ Page({
   },
 
   daochuCanvas: function(){
+    console.log("导出")
     wx.canvasToTempFilePath({
       x: 0,
       y: 0,
