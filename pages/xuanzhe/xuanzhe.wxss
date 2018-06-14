@@ -16,7 +16,7 @@
 .kf_image{
   z-index: 9999;
   width: 100rpx;
-  height: 100rpx;
+  height: 80rpx;
 }
 
 .all{

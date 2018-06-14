@@ -49,7 +49,7 @@ Page({
     this.setData({
       is_x_yj: options.is_x_yj
     })
-    console.log(typeof(this.data.is_x_yj))
+
 
     wx.showLoading({
       title: '读取数据···',
@@ -156,66 +156,37 @@ Page({
     context.stroke()
 
     if(this.data.is_x_yj === '1'){
-      // var anchor  = this.anchor(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat)
-      console.log("多曲线作图")
-      context.beginPath()
-      context.setStrokeStyle("red")
-      context.setLineWidth(1)
-      var zuobiao = this.data.zuobiao
-      for (var i = 0; i < zuobiao.length; i++) {
-        console.log("选择城市坐标： ", zuobiao[i])
-        //var anchor = this.anchor(this.data.home_long, this.data.home_lat, zuobiao[i][0], zuobiao[i][1])
+      if(this.data.To === '彩色旅途'){
+        console.log("彩色旅途")
+        context.beginPath()
+        context.setStrokeStyle("red")
+        context.setLineWidth(1)
+        var zuobiao = this.data.zuobiao
         context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
-        //context.quadraticCurveTo(anchor[0], anchor[1], this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
-        context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
-        context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
-      }
-      
-      context.setFontSize(16)
-      context.setFillStyle('green')
-      context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
-      var citys = this.data.citys
-      citys.splice(0, 1)
-      console.log(citys)
-      var citys_string = citys.join(',')
-      console.log(citys_string)
-      var first_ = parseInt(this.data.s_width * 0.90 / 16)
-      console.log(first_)
-      var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
-      console.log(second__)
-      // 改一下，弄成三行长的
-      var three_long = 4 * first_
-      var l_n = citys_string.slice(0, three_long)
-      var s_n = citys_string.slice(three_long)
-
-      console.log('l_n: ', l_n)
-      console.log('s_n: ', s_n)
-
-      var l = 0
-      for (var i = 0; i < 4; i++) {
-        console.log("第", i, "行")
-        for (var j = 0; j < first_; j++) {
-          console.log(j)
-          if (l_n[l]) {
-            context.fillText(l_n[l], 0.05 * this.data.s_width + j * 16, (0.55 + i * 0.03 ) * this.data.s_height)
-            l += 1
-          }
+        for( var i = 0; i < zuobiao.length; i++ ){
+          context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+          context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
         }
-      }
 
-      var s = 0
-      var jihang = parseInt(s_n.length / second__) + 1
-      for (var i = 0; i < jihang; i++) {
-        console.log("第", i, "行")
-        for (var j = 0; j < second__; j++) {
-          console.log(j)
-          if (s_n[s]) {
-            context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + 0.09 + i * 0.03) * this.data.s_height)
-            s += 1
-          }
-        }
+        this.writeCityName(context)
+        context.stroke()
       }
-      context.stroke()
+      else{
+        console.log("多点多线作图")
+        context.beginPath()
+        context.setStrokeStyle("red")
+        context.setLineWidth(1)
+        var zuobiao = this.data.zuobiao
+        for (var i = 0; i < zuobiao.length; i++) {
+          console.log("选择城市坐标： ", zuobiao[i])
+          context.moveTo(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height))
+          context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
+          context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
+        }
+
+        this.writeCityName(context)
+        context.stroke()
+      }
     }
     else{
       context.beginPath()
@@ -251,17 +222,6 @@ Page({
       context.stroke()
     }
 
-
-    // context.beginPath()
-    // context.arc(this.longToZB(this.data.home_long, this.data.s_width), this.latToZB(this.data.home_lat, this.data.s_height), 2, 0, 2 * Math.PI)
-    // context.setFillStyle('red')
-    // context.fill()
-
-    // context.beginPath()
-    // context.arc(this.longToZB(this.data.school_long, this.data.s_width), this.latToZB(this.data.school_lat, this.data.s_height), 2, 0, 2 * Math.PI)
-    // context.setFillStyle('blue')
-    // context.fill()
-
     context.beginPath()
     context.setFontSize(20)
     context.setFillStyle('#00FFFF')
@@ -273,6 +233,7 @@ Page({
       context.setFontSize(22)
       context.setFillStyle('green')
       context.fillText(app.globalData.userInfo.nickName, 0.05 * this.data.s_width, 0.49 * this.data.s_height)
+      // context.drawImage(app.globalData.userInfo.avatarUrl, 0.05 * this.data.s_width, 0.51 * this.data.s_height )
     }
     catch(err){
       console.log(err)
@@ -294,6 +255,54 @@ Page({
     var r = sh * 0.7 * ( 53.6 - lat ) * 0.018 + this.data.yuliu_h
     return r
   },
+
+  writeCityName: function (context){
+    context.setFontSize(16)
+    context.setFillStyle('green')
+    context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+    var citys = this.data.citys
+    citys.splice(0, 1)
+    console.log(citys)
+    var citys_string = citys.join(',')
+    console.log(citys_string)
+    var first_ = parseInt(this.data.s_width * 0.90 / 16)
+    console.log(first_)
+    var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
+    console.log(second__)
+    // 改一下，弄成三行长的
+    var three_long = 4 * first_
+    var l_n = citys_string.slice(0, three_long)
+    var s_n = citys_string.slice(three_long)
+
+    console.log('l_n: ', l_n)
+    console.log('s_n: ', s_n)
+
+    var l = 0
+    for (var i = 0; i < 4; i++) {
+      console.log("第", i, "行")
+      for (var j = 0; j < first_; j++) {
+        console.log(j)
+        if (l_n[l]) {
+          context.fillText(l_n[l], 0.05 * this.data.s_width + j * 16, (0.55 + i * 0.03) * this.data.s_height)
+          l += 1
+        }
+      }
+    }
+
+    var s = 0
+    var jihang = parseInt(s_n.length / second__) + 1
+    for (var i = 0; i < jihang; i++) {
+      console.log("第", i, "行")
+      for (var j = 0; j < second__; j++) {
+        console.log(j)
+        if (s_n[s]) {
+          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.58 + 0.09 + i * 0.03) * this.data.s_height)
+          s += 1
+        }
+      }
+    }
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */

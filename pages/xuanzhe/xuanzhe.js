@@ -19,6 +19,7 @@ Page({
       { name: '即将去的远方', value: '即将到达的远方' },
       { name: '想到达的远方(选择多个城市)', value: '想到达的远方' },
       { name: '已经到达的远方（选择多个城市）', value: '已经到达的远方' },
+      { name: '彩色旅途（选择多个城市）', value: '我的彩色旅途' }
     ],
     home: { name: '家', value: '家', checked: true },
     school_lat: '',
@@ -38,7 +39,7 @@ Page({
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
     var v = e.detail.value
-    if (v === "想到达的远方" || v === "已经到达的远方") {
+    if (v === "想到达的远方" || v === "已经到达的远方" || v === "彩色旅途") {
       this.setData({
         is_x_yj: true,
         display_pc: true,
