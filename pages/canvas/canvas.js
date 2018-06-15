@@ -1,8 +1,15 @@
 // pages/canvas/canvas.js
 const app = getApp()
-const m = require('../../dataofmap/suojian_china_map_ok3.js')
 const d = require('../../utils/distance.js')
+
+const h = require("../../dataofmap/nanhai.js")
+const nh = h.nanhai
+
+const m = require('../../dataofmap/dalu_taiwang_hainan.js')
 const map = m.map
+
+const p = require("../../dataofmap/china_34.js")
+const p34 = p.p34
 
 Page({
 
@@ -151,9 +158,9 @@ Page({
 
     context.beginPath()
     context.setStrokeStyle("#00F5FF")
-    context.setLineWidth(1.5)
-    for (var key in map) {
-      var p = map[key]
+    context.setLineWidth(1)
+    for (var key in nh) {
+      var p = nh[key]
       const longs = p['0']
       const lats = p['1']
       context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
@@ -162,6 +169,39 @@ Page({
       }
     }
     context.stroke()
+
+    // context.beginPath()
+    // context.setStrokeStyle("#00F5FF")
+    // context.setLineWidth(1)
+    // for (var key in map) {
+    //   var p = map[key]
+    //   const longs = p['0']
+    //   const lats = p['1']
+    //   context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
+    //   for (var i = 1; i < longs.length; i++) {
+    //     context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
+    //   }
+    // }
+    // context.stroke()
+
+
+    //test,有省界的地图
+    for (var key in p34){
+      context.beginPath()
+      context.setLineWidth(1)
+      context.setStrokeStyle("white")
+      var provice = p34[key][0]
+      context.moveTo( this.longToZB(provice[0][0], this.data.s_width), this.latToZB(provice[0][1], this.data.s_height) )
+      for ( var i=1; i < provice.length; i++ ){
+        context.lineTo(this.longToZB(provice[i][0], this.data.s_width), this.latToZB(provice[i][1], this.data.s_height) )
+      }
+      context.closePath()
+      //context.setFillStyle('red')
+      context.fill()
+      context.stroke()
+    }
+    //test
+    
 
     if(this.data.is_x_yj === '1'){
       if(this.data.To === '我的彩色旅途'){
@@ -368,7 +408,7 @@ Page({
     }
     return {
       title: '旅途左右万里，起点只有吾乡。',
-      path: '/pages/canvas/canvas',
+      path: '/pages/xuanzhe/xuanzhe',
       //imageUrl: "/image/yinghe.jpg",
       success: function (res) {
         console.log("转发成功")// 转发成功
