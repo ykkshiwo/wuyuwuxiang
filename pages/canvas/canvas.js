@@ -4,6 +4,11 @@ const m = require('../../dataofmap/suojian_china_map_ok3.js')
 const d = require('../../utils/distance.js')
 const map = m.map
 
+//test
+const n = require("../../dataofmap/china_34.js")
+const map_ = n.b
+//test
+
 Page({
 
   /**
@@ -149,19 +154,38 @@ Page({
     // context.setFillStyle('#00EE00')
     // context.fillRect(0.05 * this.data.s_width - 2, 0.72 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
+    // context.beginPath()
+    // context.setStrokeStyle("#00F5FF")
+    // context.setLineWidth(1.5)
+    // for (var key in map) {
+    //   var p = map[key]
+    //   const longs = p['0']
+    //   const lats = p['1']
+    //   context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
+    //   for (var i = 1; i < longs.length; i++) {
+    //     context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
+    //   }
+    // }
+    // context.stroke()
+
+    // test
     context.beginPath()
     context.setStrokeStyle("#00F5FF")
-    context.setLineWidth(1.5)
-    for (var key in map) {
-      var p = map[key]
+    context.setLineWidth(1)
+    for (var key in map_) {
+      var p = map_[key]
       const longs = p['0']
       const lats = p['1']
       context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
+      console.log(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
       for (var i = 1; i < longs.length; i++) {
         context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
+        // console.log('lineto :',this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
       }
+      context.closePath()
+      context.stroke()
     }
-    context.stroke()
+    // test
 
     if(this.data.is_x_yj === '1'){
       if(this.data.To === '我的彩色旅途'){

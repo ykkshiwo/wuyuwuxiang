@@ -37,12 +37,6 @@
 					"name": "画图",
 					"pathName": "pages/canvas/canvas",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "xuanzhe",
-					"pathName": "pages/xuanzhe/xuanzhe",
-					"query": ""
 				}
 			]
 		}
