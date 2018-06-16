@@ -58,7 +58,7 @@
     <scroll-view class='provices' scroll-y='true'>
       <view wx:for="{{provices}}">
         <view id="{{ item }}" class='provice' catchtap='chooseP'>{{ item }}</view>
-      </view>
+      </view> 
     </scroll-view>
 
     
@@ -71,6 +71,9 @@
   <view class='have_choose_citys_'>
   <scroll-view class='have_choose_citys' scroll-y='true'>
   {{ disallCitys }}
+  </scroll-view>
+    <scroll-view class='have_choose_provices' scroll-y='true'>
+  {{ disallProvice }}
   </scroll-view>
   </view>
   <view class='button_clear_ok'>

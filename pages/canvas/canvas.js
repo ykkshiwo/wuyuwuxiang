@@ -23,6 +23,7 @@ Page({
     yuliu_h: 0,
     is_x_yj: 0,
     colors: ['#FFFF00', '#FF0000', '#CDAD00', '#C0FF3E', '#9400D3', '#8E8E38', '#00FFFF', '#00EE00', '#0000EE', '#9A32CD'],
+    myChinaProvices: ["河北省", "河北的廊坊","山西省", "吉林省", "辽宁省", "黑龙江省", "陕西省", "甘肃省", "青海省", "山东省", "福建省", "浙江省", "台湾省", "河南省", "湖北省", "湖南省", "江西省", "江苏省", "安徽省", "广东省", "海南省", "四川省", "贵州省", "云南省", "北京市", "天津市", "上海市", "重庆市", "内蒙古自治区", "新疆维吾尔族自治区", "宁夏回族自治区", "广西壮族自治区", "西藏藏族自治区", "香港特别行政区", "澳门特别行政区"],
   },
 
   /**
@@ -55,7 +56,7 @@ Page({
     })
 
     this.setData({
-      is_x_yj: options.is_x_yj
+      is_x_yj: options.is_x_yj,
     })
 
 
@@ -70,8 +71,23 @@ Page({
         zuobiao: wx.getStorageSync('zuobiao'),
         To: options.To,
       })
-      console.log("citys: ", this.data.citys)
-      console.log("zuobiao: ", this.data.zuobiao)
+      //console.log("citys: ", this.data.citys)
+      //console.log("zuobiao: ", this.data.zuobiao)
+      var provices = wx.getStorageSync('provices');
+      if (provices.indexOf("河北省") > -1){
+        var new_length = provices.push("河北的廊坊")
+      }
+      // this.setData({
+      //   provices: provices,
+      // })
+      console.log("哪些省：", provices)
+      var newMyChinaProvices = this.data.myChinaProvices.map(function(x){if(provices.includes(x)){ return '0' + x } else { return x } })
+      newMyChinaProvices.sort()
+      console.log(newMyChinaProvices)
+      this.setData({
+        newMyChinaProvices: newMyChinaProvices
+      })
+
     }
     else {
       this.setData({
@@ -156,6 +172,7 @@ Page({
     // context.setFillStyle('#00EE00')
     // context.fillRect(0.05 * this.data.s_width - 2, 0.72 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
+    //九段线及其南海争议岛屿包括钓鱼岛
     context.beginPath()
     context.setStrokeStyle("#00F5FF")
     context.setLineWidth(1)
@@ -186,17 +203,45 @@ Page({
 
 
     //test,有省界的地图
-    for (var key in p34) {
+    // for (var key in p34) {
+    //   context.beginPath()
+    //   context.setLineWidth(1)
+    //   context.setStrokeStyle("white")
+    //   //console.log("key: ", key)
+    //   if (this.data.provices.indexOf(key) > -1) {
+    //     context.setFillStyle('#CDC9C9')
+    //   }
+    //   else{
+    //     context.setFillStyle('#F0F0F0')
+    //   }
+    //   var provice = p34[key][0]
+    //   context.moveTo(this.longToZB(provice[0][0], this.data.s_width), this.latToZB(provice[0][1], this.data.s_height))
+    //   for (var i = 1; i < provice.length; i++) {
+    //     context.lineTo(this.longToZB(provice[i][0], this.data.s_width), this.latToZB(provice[i][1], this.data.s_height))
+    //   }
+    //   context.closePath()
+    //   context.fill()
+    //   context.stroke()
+    // }
+
+    for(var j=34; j > -1; j--){
       context.beginPath()
       context.setLineWidth(1)
       context.setStrokeStyle("white")
-      var provice = p34[key][0]
+      console.log(this.data.newMyChinaProvices[j][0])
+      if ( this.data.newMyChinaProvices[j][0] === '0') {
+        context.setFillStyle('#CDC9C9')
+        p = this.data.newMyChinaProvices[j].slice(1)
+      }
+      else{
+        p = this.data.newMyChinaProvices[j]
+      }
+      var provice = p34[p][0]
       context.moveTo(this.longToZB(provice[0][0], this.data.s_width), this.latToZB(provice[0][1], this.data.s_height))
       for (var i = 1; i < provice.length; i++) {
         context.lineTo(this.longToZB(provice[i][0], this.data.s_width), this.latToZB(provice[i][1], this.data.s_height))
       }
       context.closePath()
-      //context.setFillStyle('red')
       context.fill()
       context.stroke()
     }

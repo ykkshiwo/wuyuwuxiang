@@ -7,11 +7,11 @@ const p_c = p.provice_city
 
 Page({
 
-  /**
+  /** 
    * 页面的初始数据
    */
   data: {
-    provices: ["河北省", "山西省", "吉林省", "辽宁省", "黑龙江省", "陕西省", "甘肃省", "青海省", "山东省", "福建省", "浙江省", "台湾省", "河南省", "湖北省", "湖南省", "江西省", "江苏省", "安徽省", "广东省", "海南省", "四川省", "贵州省", "云南省", "北京市", "天津市", "上海市", "重庆市", "内蒙古自治区", "新疆维吾尔族自治区", "宁夏回族自治区", "广西壮族自治区", "西藏自治区", "香港特别行政区", "澳门特别行政区"],
+    provices: ["河北省", "山西省", "吉林省", "辽宁省", "黑龙江省", "陕西省", "甘肃省", "青海省", "山东省", "福建省", "浙江省", "台湾省", "河南省", "湖北省", "湖南省", "江西省", "江苏省", "安徽省", "广东省", "海南省", "四川省", "贵州省", "云南省", "北京市", "天津市", "上海市", "重庆市", "内蒙古自治区", "新疆维吾尔族自治区", "宁夏回族自治区", "广西壮族自治区", "西藏藏族自治区", "香港特别行政区", "澳门特别行政区"],
     now_citys: '',
     items: [
       { name: '我的大学', value: '的大学' },
@@ -35,6 +35,8 @@ Page({
     allCity_unique: '',
     display_pc: false,
     disallCitys: '',
+    now_provice:'',
+    allProvice:''
   },
 
   radioChange: function (e) {
@@ -213,9 +215,15 @@ Page({
     console.log(aCity)
     var allCity = this.data.allCity + ';' + aCity
     var disallCitys = allCity.slice(5)
+    var allProvice = this.data.allProvice +  ';' + this.data.now_provice
+    var allProvice_sz = this.bouncer(allProvice.split(";"))
+    var allCity_unique = o.unique(allProvice_sz)
+    console.log(allCity_unique)
     this.setData({
       allCity: allCity,
       disallCitys: disallCitys,
+      disallProvice: allCity_unique,
+      allProvice: allProvice
     })
   },
 
@@ -232,6 +240,7 @@ Page({
     try {
       wx.setStorageSync('zuobiao', zuobiao)
       wx.setStorageSync('citys', allCity_unique)
+      wx.setStorageSync('provices', this.data.disallProvice)
     } catch (e) {
     }
     wx.hideLoading()
@@ -307,7 +316,8 @@ Page({
     var now_citys = p_c[provice_choosed]
     console.log(now_citys)
     this.setData({
-      now_citys: now_citys
+      now_citys: now_citys,
+      now_provice: provice_choosed
     })
   },
 
@@ -321,6 +331,8 @@ Page({
     this.setData({
       allCity: '吾乡->',
       disallCitys: '',
+      disallProvice: '',
+      allProvice:'',
     })
   }
 })

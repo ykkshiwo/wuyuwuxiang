@@ -57,8 +57,13 @@
 }
 
 .have_choose_citys{
-  height: 100%;
+  height: 70%;
   background-color: white;
+}
+
+.have_choose_provices{
+  height: 30%;
+  background-color: grey;
 }
 
 .have_choose_citys_{
