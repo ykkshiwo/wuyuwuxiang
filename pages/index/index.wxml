@@ -1,15 +1,23 @@
 <view class="container"> 
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
-    </block>
   </view>
-  <navigator url="/pages/xuanzhe/xuanzhe" hover-class="navigator-hover" class='xiexin'>
+  <!-- <navigator url="/pages/xuanzhe/xuanzhe" hover-class="navigator-hover" class='xiexin'>
     <text class="xiexin-wenzi">吾与吾乡</text>
-  </navigator>
+    <image class='wywx' src='../../images/wywx.png' mode='aspectFit' open-type="getUserInfo"></image>
+  </navigator> -->
+  <button class="kf_button" open-type="getUserInfo" catchtap='toXuanzhe'>
+    <image class="wywx" src="../../images/wywx.png"></image>
+</button> 
 </view>
+
   <view style='height: 10%; width: 100%;'>
+
+<image class='gs-1' src='../../images/gs-1.png' mode='aspectFit'></image>
+<image class='gs-2' src='../../images/gs-2.png' mode='aspectFit'></image>
+<image class='gs-3' src='../../images/gs-3.png' mode='aspectFit'></image>
+<image class='gs-4' src='../../images/gs-4.png' mode='aspectFit'></image>
+<image class='gs-5' src='../../images/gs-5.png' mode='aspectFit'></image>
 
   </view>

@@ -50,5 +50,11 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  
+  toXuanzhe: function(){
+    wx.navigateTo({
+      url: '../xuanzhe/xuanzhe',
+    })
   }
 })

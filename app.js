@@ -29,6 +29,13 @@ App({
               }
             }
           })
+          // wx.authorize({
+          //   scope: 'scope.record',
+          //   success(){
+          //     console.log("success")
+          //     wx.startRecord()
+          //   }
+          // })
         }
       }
     })
