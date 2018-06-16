@@ -1,13 +1,15 @@
 // pages/canvas/canvas.js
 const app = getApp()
-const m = require('../../dataofmap/suojian_china_map_ok3.js')
 const d = require('../../utils/distance.js')
+
+const h = require("../../dataofmap/nanhai.js")
+const nh = h.nanhai
+
+const m = require('../../dataofmap/dalu_taiwang_hainan.js')
 const map = m.map
 
-//test
-const n = require("../../dataofmap/china_34.js")
-const map_ = n.b
-//test
+const p = require("../../dataofmap/china_34.js")
+const p34 = p.p34
 
 Page({
 
@@ -37,7 +39,7 @@ Page({
     })
     var that = this
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         console.log(res.screenHeight, res.screenWidth)
         var s_width = res.screenWidth
         var s_height = res.screenHeight
@@ -60,7 +62,7 @@ Page({
     wx.showLoading({
       title: '读取数据···',
     })
-    if(this.data.is_x_yj === '1'){
+    if (this.data.is_x_yj === '1') {
       this.setData({
         home_long: options.home_long,
         home_lat: options.home_lat,
@@ -71,7 +73,7 @@ Page({
       console.log("citys: ", this.data.citys)
       console.log("zuobiao: ", this.data.zuobiao)
     }
-    else{
+    else {
       this.setData({
         home_long: options.home_long,
         home_lat: options.home_lat,
@@ -113,15 +115,15 @@ Page({
     // console.log("x_pain: ",x_pian)
     var x_pian = x_pian_ * 0.75
     var y_pian = (Math.abs(x_2) - Math.abs(x_1)) * x_pian / (Math.abs(y_1) - Math.abs(y_2))
-    if (Math.abs(y_pian) > 400){
-      var y_pian = 400 * y_pian/Math.abs(y_pian)
+    if (Math.abs(y_pian) > 400) {
+      var y_pian = 400 * y_pian / Math.abs(y_pian)
     }
     console.log("y_pain: ", y_pian, x_pian, )
     if ((y_2 > y_1 && x_2 > x_1) || (y_2 < y_1 && x_2 < x_1)) {
       var x_anchor = x_middle + x_pian
       var y_anchor = y_middle + y_pian
       console.log(x_anchor, y_anchor)
-      return [x_anchor,y_anchor]
+      return [x_anchor, y_anchor]
     }
     else {
       var x_anchor = x_middle - x_pian
@@ -154,9 +156,23 @@ Page({
     // context.setFillStyle('#00EE00')
     // context.fillRect(0.05 * this.data.s_width - 2, 0.72 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
 
+    context.beginPath()
+    context.setStrokeStyle("#00F5FF")
+    context.setLineWidth(1)
+    for (var key in nh) {
+      var p = nh[key]
+      const longs = p['0']
+      const lats = p['1']
+      context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
+      for (var i = 1; i < longs.length; i++) {
+        context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
+      }
+    }
+    context.stroke()
+
     // context.beginPath()
     // context.setStrokeStyle("#00F5FF")
-    // context.setLineWidth(1.5)
+    // context.setLineWidth(1)
     // for (var key in map) {
     //   var p = map[key]
     //   const longs = p['0']
@@ -168,27 +184,27 @@ Page({
     // }
     // context.stroke()
 
-    // test
-    context.beginPath()
-    context.setStrokeStyle("#00F5FF")
-    context.setLineWidth(1)
-    for (var key in map_) {
-      var p = map_[key]
-      const longs = p['0']
-      const lats = p['1']
-      context.moveTo(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
-      console.log(this.longToZB(longs[0], this.data.s_width), this.latToZB(lats[0], this.data.s_height))
-      for (var i = 1; i < longs.length; i++) {
-        context.lineTo(this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
-        // console.log('lineto :',this.longToZB(longs[i], this.data.s_width), this.latToZB(lats[i], this.data.s_height))
+
+    //test,有省界的地图
+    for (var key in p34) {
+      context.beginPath()
+      context.setLineWidth(1)
+      context.setStrokeStyle("white")
+      var provice = p34[key][0]
+      context.moveTo(this.longToZB(provice[0][0], this.data.s_width), this.latToZB(provice[0][1], this.data.s_height))
+      for (var i = 1; i < provice.length; i++) {
+        context.lineTo(this.longToZB(provice[i][0], this.data.s_width), this.latToZB(provice[i][1], this.data.s_height))
       }
       context.closePath()
+      //context.setFillStyle('red')
+      context.fill()
       context.stroke()
     }
-    // test
+    //test
 
-    if(this.data.is_x_yj === '1'){
-      if(this.data.To === '我的彩色旅途'){
+
+    if (this.data.is_x_yj === '1') {
+      if (this.data.To === '我的彩色旅途') {
         console.log("我的彩色旅途")
         context.beginPath()
         context.setStrokeStyle("red")
@@ -196,11 +212,11 @@ Page({
         var zuobiao = this.data.zuobiao
         var ok = zuobiao.unshift([this.data.home_long, this.data.home_lat])
 
-        for( var i = 0; i < ok-1; i++ ){
+        for (var i = 0; i < ok - 1; i++) {
           context.beginPath()
           context.moveTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
           context.lineTo(this.longToZB(zuobiao[i + 1][0], this.data.s_width), this.latToZB(zuobiao[i + 1][1], this.data.s_height))
-          context.setStrokeStyle(this.data.colors[parseInt(10*Math.random())])
+          context.setStrokeStyle(this.data.colors[parseInt(10 * Math.random())])
           context.stroke()
         }
 
@@ -213,7 +229,7 @@ Page({
 
         this.writeCityName(context)
       }
-      else{
+      else {
         console.log("多点多线作图")
         context.beginPath()
         context.setStrokeStyle("red")
@@ -230,7 +246,7 @@ Page({
         context.stroke()
       }
     }
-    else{
+    else {
       context.beginPath()
       context.setStrokeStyle("red")
       context.setLineWidth(1)
@@ -268,17 +284,17 @@ Page({
     context.setFillStyle('#00FFFF')
     context.setFontSize(8)
     var now = new Date()
-    context.fillText(parseInt(now.getFullYear()) + '-'+ parseInt(now.getMonth() + 1) + '-' + parseInt(now.getDate()), 0.05 * this.data.s_width, 0.05 * this.data.s_width)
+    context.fillText(parseInt(now.getFullYear()) + '-' + parseInt(now.getMonth() + 1) + '-' + parseInt(now.getDate()), 0.05 * this.data.s_width, 0.05 * this.data.s_width)
     context.fillText("由“吾与吾乡”绘制", 0.05 * this.data.s_width, 0.05 * this.data.s_width + 8)
     context.stroke()
 
-    try{
+    try {
       context.setFontSize(22)
       context.setFillStyle('yellow')
       context.fillText(app.globalData.userInfo.nickName, 0.05 * this.data.s_width, 0.49 * this.data.s_height)
       // context.drawImage(app.globalData.userInfo.avatarUrl, 0.4 * this.data.s_width, 0.1 * this.data.s_width, 0.2 * this.data.s_width, 0.2 * this.data.s_width)
     }
-    catch(err){
+    catch (err) {
       console.log(err)
     }
 
@@ -289,17 +305,17 @@ Page({
     wx.hideLoading()
   },
 
-  longToZB: function(long, sw){
+  longToZB: function (long, sw) {
     var r = 0.9 * (long - 73.38) * sw / 61.62 + 73.38 - (73.38 - this.data.yuliu_w)
     return r
   },
 
-  latToZB: function(lat, sh){
-    var r = sh * 0.7 * ( 53.6 - lat ) * 0.018 + this.data.yuliu_h
+  latToZB: function (lat, sh) {
+    var r = sh * 0.7 * (53.6 - lat) * 0.018 + this.data.yuliu_h
     return r
   },
 
-  writeCityName: function (context){
+  writeCityName: function (context) {
     context.setFontSize(16)
     context.setFillStyle('#E0FFFF')
     context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
@@ -350,35 +366,35 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
@@ -392,7 +408,7 @@ Page({
     }
     return {
       title: '旅途左右万里，起点只有吾乡。',
-      path: '/pages/canvas/canvas',
+      path: '/pages/xuanzhe/xuanzhe',
       //imageUrl: "/image/yinghe.jpg",
       success: function (res) {
         console.log("转发成功")// 转发成功
@@ -401,10 +417,10 @@ Page({
         // 转发失败
       }
     }
-  
+
   },
 
-  daochuCanvas: function(){
+  daochuCanvas: function () {
     console.log("导出")
     wx.canvasToTempFilePath({
       x: 0,
@@ -427,7 +443,7 @@ Page({
     })
   },
 
-  toIndex: function(){
+  toIndex: function () {
     wx.redirectTo({
       url: '../xuanzhe/xuanzhe'
     })
