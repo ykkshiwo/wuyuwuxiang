@@ -119,6 +119,9 @@ Page({
 
   xuanLocationSchool: function () {
     console.log("开始学校选择地点")
+    this.setData({
+      have_choose: ''
+    })
     var that = this
     wx.chooseLocation({
       success: function (res) {
@@ -128,9 +131,13 @@ Page({
         that.setData({
           school_lat: lat_,
           school_long: long_,
+          have_choose: '已选择'
         })
       },
       fail: function () {
+        that.setData({
+          have_choose: '(未选择)'
+        })
         wx.openSetting({
           success: function (res) {
             console.log(res.authSetting)
