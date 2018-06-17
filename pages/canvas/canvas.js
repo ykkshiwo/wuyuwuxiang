@@ -473,7 +473,7 @@ Page({
     return {
       title: '旅途左右万里，起点只有吾乡。',
       path: '/pages/index/index',
-      //imageUrl: "/image/yinghe.jpg",
+      imageUrl: "/images/zf1.jpg",
       success: function (res) {
         console.log("转发成功")// 转发成功
       },
