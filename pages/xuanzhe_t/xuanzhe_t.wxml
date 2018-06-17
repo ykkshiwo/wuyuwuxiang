@@ -1,26 +1,28 @@
 <!--pages/xuanzhe_t/xuanzhe_t.wxml-->
 <view class="container">
-
+ 
 <view class='get'>
-  <view>
+  <view class='qidian_yige'>
   起点只有一个：
   </view>
   <view class='get-home'>
-    <view class='qidian'>起点只有吾乡</view>
+    <view class='qidian'>
+      <text class='qidian-wz'>起点只有吾乡</text> 
+    </view>
   </view>
-  <view>
+  <view class='zhongdian_henduo'>
   终点却有很多：
   </view>
   <view class='get-citys'>
     <view class='dang-citys'>
-      <view class='city'> 单城市1 </view>
-      <view class='city'> 单城市2 </view>
-      <view class='city'> 单城市3 </view>
+      <view class='city'> 我的大学 </view>
+      <view class='city'> 工作的地方 </view>
+      <view class='city'> 梦想的远方 </view>
     </view>
     <view class='duo-citys'>
-      <view class='city'> 多城市1 </view>
-      <view class='city'> 多城市2 </view>
-      <view class='city'> 多城市3 </view>
+      <view class='city'> 想去的地方 </view>
+      <view class='city'> 去过的地方 </view>
+      <view class='city'> 彩色的旅途 </view>
     </view>
   </view>
 </view>
