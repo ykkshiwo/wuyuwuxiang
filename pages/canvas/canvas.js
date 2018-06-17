@@ -99,6 +99,10 @@ Page({
         school_address: options.school_address,
         To: options.To,
       })
+      this.data.myChinaProvices.push("河北的廊坊")
+      this.setData({
+        newMyChinaProvices: this.data.myChinaProvices
+      })
 
       var xy_anchor = this.anchor(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat)
       console.log("xy_anchor: ", xy_anchor)
@@ -174,7 +178,7 @@ Page({
 
     //九段线及其南海争议岛屿包括钓鱼岛
     context.beginPath()
-    context.setStrokeStyle("#00F5FF")
+    context.setStrokeStyle("#FFFF00")
     context.setLineWidth(1)
     for (var key in nh) {
       var p = nh[key]
@@ -227,7 +231,7 @@ Page({
     for(var j=34; j > -1; j--){
       context.beginPath()
       context.setLineWidth(1)
-      context.setStrokeStyle("white")
+      context.setStrokeStyle("#FFFF00")
       console.log(this.data.newMyChinaProvices[j][0])
       if ( this.data.newMyChinaProvices[j][0] === '0') {
         context.setFillStyle('#CDC9C9')
@@ -249,7 +253,7 @@ Page({
 
 
     if (this.data.is_x_yj === '1') {
-      if (this.data.To === '我的彩色旅途') {
+      if (this.data.To === '彩色的旅途') {
         console.log("我的彩色旅途")
         context.beginPath()
         context.setStrokeStyle("red")

@@ -54,7 +54,7 @@ Page({
   
   toXuanzhe: function(){
     wx.navigateTo({
-      url: '../xuanzhe/xuanzhe',
+      url: '../xuanzhe_t/xuanzhe_t',
     })
   }
 })

@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/canvas/canvas",
-    "pages/xuanzhe/xuanzhe",
     "pages/xuanzhe_t/xuanzhe_t"
   ],
   "window":{

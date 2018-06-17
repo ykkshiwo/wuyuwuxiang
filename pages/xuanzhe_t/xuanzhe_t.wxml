@@ -6,8 +6,12 @@
   起点只有一个：
   </view>
   <view class='get-home'>
-    <view class='qidian'>
+    <view class='qidian' catchtap='xuanLocationHome'>
       <text class='qidian-wz'>起点只有吾乡</text> 
+    </view>
+    <view class='jwd'>
+      <view>经度：{{ home_lat }}</view>
+      <view>维度：{{ home_long }}</view>
     </view>
   </view>
   <view class='zhongdian_henduo'>
@@ -15,20 +19,54 @@
   </view>
   <view class='get-citys'>
     <view class='dang-citys'>
-      <view class='city'> 我的大学 </view>
-      <view class='city'> 工作的地方 </view>
-      <view class='city'> 梦想的远方 </view>
+      <view class='city' catchtap='xuanYuanFang' id="我的大学"> 我的大学 </view>
+      <view class='city' catchtap='xuanYuanFang' id="工作的地方"> 工作的地方 </view>
+      <view class='city' catchtap='xuanYuanFang' id="梦想的远方"> 梦想的远方 </view>
     </view>
     <view class='duo-citys'>
-      <view class='city'> 想去的地方 </view>
-      <view class='city'> 去过的地方 </view>
-      <view class='city'> 彩色的旅途 </view>
+      <view class='city' catchtap='xuanYuanFang' id="想去的地方"> 想去的地方 </view>
+      <view class='city' catchtap='xuanYuanFang' id="去过的地方"> 去过的地方 </view>
+      <view class='city' catchtap='xuanYuanFang' id="彩色的旅途"> 彩色的旅途 </view>
     </view>
   </view>
 </view>
 
   <view class='button'>
-    <button plain='true' type='primary'>产生图片</button>
+    <button plain='true' type='primary' catchtap='produce'>产生图片</button>
   </view>
+
+<!-- 以下为隐藏界面 -->
+<view wx:if="{{ display_pc }}" class='citys_xuanzhe'>
+  <view class='provices_citys'>
+    <scroll-view class='provices' scroll-y='true'>
+      <view wx:for="{{provices}}">
+        <view id="{{ item }}" class='provice' catchtap='chooseP'>{{ item }}</view>
+      </view> 
+    </scroll-view>
+
+    
+    <scroll-view class='citys_' scroll-y='true'>
+      <view wx:for="{{now_citys}}">
+        <view id="{{ item }}" class='test_citys' catchtap='chooseC'>{{ item }}</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='have_choose_citys_'>
+  <scroll-view class='have_choose_citys' scroll-y='true'>
+  {{ disallCitys }}
+  </scroll-view>
+    <scroll-view class='have_choose_provices' scroll-y='true'>
+  {{ disallProvice }}
+  </scroll-view>
+  </view>
+  <view class='button_clear_ok'>
+    <view class='clear' catchtap='clear'>
+        清除
+    </view>
+    <view class='confirm'  catchtap='confirm'>
+        确定
+    </view>
+  </view>
+</view>
 
 </view>
