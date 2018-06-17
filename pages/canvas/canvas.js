@@ -274,7 +274,14 @@ Page({
           context.fill()
         }
 
+        context.beginPath()
+        context.setFontSize(16)
+        context.setFillStyle(this.data.to_color)
+        context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+
+        context.beginPath()
         this.writeCityName(context)
+        context.stroke()
       }
       else {
         console.log("多点多线作图")
@@ -299,6 +306,9 @@ Page({
         this.writeCityName(context)
         context.stroke()
       }
+
+
+
     }
     else {
       context.beginPath()
@@ -462,7 +472,7 @@ Page({
     }
     return {
       title: '旅途左右万里，起点只有吾乡。',
-      path: '/pages/xuanzhe/xuanzhe',
+      path: '/pages/index/index',
       //imageUrl: "/image/yinghe.jpg",
       success: function (res) {
         console.log("转发成功")// 转发成功
@@ -499,7 +509,7 @@ Page({
 
   toIndex: function () {
     wx.redirectTo({
-      url: '../xuanzhe/xuanzhe'
+      url: '../xuanzhe_t/xuanzhe_t'
     })
   }
 })
