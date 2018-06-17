@@ -17,6 +17,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    dalu_color: '#E0FFFF',
+    jdx_color: '#E0FFFF',
+    citysname_color: '#A020F0',
+    to_color: '#9AFF9A',
     s_width: 0,
     s_height: 0,
     yuliu_w: 0,
@@ -157,14 +161,11 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // console.log(this.data.home_long, this.data.home_lat, this.data.school_long, this.data.school_lat, this.data.To)
     wx.showLoading({
       title: '绘制中······',
     })
     var context = wx.createCanvasContext('firstCanvas')
 
-    // context.setFillStyle('#0A0A0A')
-    // context.fillRect(0, 0, this.data.s_width, this.data.s_height)
     const grd = context.createLinearGradient(0, 0, 0, this.data.s_height)
     grd.addColorStop(0, 'black')
     grd.addColorStop(1, 'gray')
@@ -173,12 +174,9 @@ Page({
     context.setFillStyle(grd)
     context.fillRect(0, 0, this.data.s_width, this.data.s_height)
 
-    // context.setFillStyle('#00EE00')
-    // context.fillRect(0.05 * this.data.s_width - 2, 0.72 * this.data.s_height - 2, this.data.s_width * 0.25 + 4, this.data.s_width * 0.25 + 4)
-
     //九段线及其南海争议岛屿包括钓鱼岛
     context.beginPath()
-    context.setStrokeStyle("#FFFF00")
+    context.setStrokeStyle(this.data.jdx_color)
     context.setLineWidth(1)
     for (var key in nh) {
       var p = nh[key]
@@ -231,7 +229,7 @@ Page({
     for(var j=34; j > -1; j--){
       context.beginPath()
       context.setLineWidth(1)
-      context.setStrokeStyle("#FFFF00")
+      context.setStrokeStyle(this.data.dalu_color)
       console.log(this.data.newMyChinaProvices[j][0])
       if ( this.data.newMyChinaProvices[j][0] === '0') {
         context.setFillStyle('#CDC9C9')
@@ -290,7 +288,14 @@ Page({
           context.lineTo(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height))
           context.arc(this.longToZB(zuobiao[i][0], this.data.s_width), this.latToZB(zuobiao[i][1], this.data.s_height), 1, 0, 2 * Math.PI)
         }
+        context.stroke()
 
+        context.beginPath()
+        context.setFontSize(16)
+        context.setFillStyle(this.data.to_color)
+        context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+        
+        context.beginPath()
         this.writeCityName(context)
         context.stroke()
       }
@@ -366,8 +371,8 @@ Page({
 
   writeCityName: function (context) {
     context.setFontSize(16)
-    context.setFillStyle('#E0FFFF')
-    context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+    context.setFillStyle(this.data.citysname_color)
+    // context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
     var citys = this.data.citys
     citys.splice(0, 1)
     console.log(citys)
