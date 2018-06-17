@@ -1,0 +1,63 @@
+/* pages/xuanzhe_t/xuanzhe_t.wxss */
+.container { 
+  height: 100%;
+  background-color: #E6E6FA;
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx;
+  border: 1rpx solid red;
+} 
+
+.get{
+  border: 1rpx solid gold;
+  height: 80%;
+  width: 90%;
+  padding: 15rpx;
+}
+
+.get-home{
+  border: 1rpx solid blue;
+  height: 30%;
+  padding: 15rpx;
+}
+
+.qidian{
+  border: 1rpx solid saddlebrown;
+  text-align: center;
+}
+
+.get-citys{
+  border: 1rpx solid yellow;
+  /* padding: 10rpx;   */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.dang-citys{
+  border: 1rpx solid red;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city{
+  border: 1rpx solid green;
+  margin-top: 30rpx;
+  padding: 5rpx 40rpx 5rpx 40rpx;
+}
+
+.duo-citys{
+  border: 1rpx solid goldenrod;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button{
+  border: 1rpx solid black;
+  padding: 10rpx;
+  width: 90%; 
+} 

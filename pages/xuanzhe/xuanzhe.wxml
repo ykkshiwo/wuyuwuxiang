@@ -1,5 +1,5 @@
 <view class='all'>
- 
+  
 <button class="kf_button" open-type="contact" session-from="weapp">
     <image class="kf_image" src="../../images/kefu.png"></image>
 </button> 

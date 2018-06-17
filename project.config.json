@@ -30,13 +30,24 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "画图",
 					"pathName": "pages/canvas/canvas",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择界面",
+					"pathName": "pages/xuanzhe/xuanzhe",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "xuanzhe_t",
+					"pathName": "pages/xuanzhe_t/xuanzhe_t"
 				}
 			]
 		}

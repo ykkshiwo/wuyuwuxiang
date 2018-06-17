@@ -1,6 +1,6 @@
 /* pages/test/test.wxss */
 /* pages/xuanzhe/xuanzhe.wxss */
-.kf_button{
+.kf_button{ 
   background-color: rgba(255, 255, 255, 0);
   height: 100rpx;
   right: 0;
@@ -85,7 +85,7 @@
   width: 35%;
   text-align: center;
   margin-right: 20rpx;
-  border-radius: 10%;
+  border-radius: 5px;
   padding: 10rpx;
   color: green;
 }
@@ -95,7 +95,7 @@
   width: 35%;
   text-align: center;
   margin-left: 20rpx;
-  border-radius: 10%;
+  border-radius: 5px;
   padding: 10rpx;
   color: green;
 }
@@ -108,7 +108,7 @@
 
 .provice{
   /* border: 1rpx solid blue; */
-  border-radius: 10%;
+  border-radius: 5px;
   width: 80%;
   text-align: center;
   background-color: gray;
@@ -126,7 +126,7 @@
   float: left;
   margin: 5rpx 10rpx 5rpx 10rpx;
   padding: 5rpx 10rpx 5rpx 10rpx;
-  border-radius: 10%;
+  border-radius: 5px;
   background-color: gray;
 }
 
