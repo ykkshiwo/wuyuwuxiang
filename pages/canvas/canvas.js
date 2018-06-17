@@ -19,7 +19,7 @@ Page({
   data: {
     dalu_color: '#E0FFFF',
     jdx_color: '#E0FFFF',
-    citysname_color: '#A020F0',
+    citysname_color: '#5CACEE',
     to_color: '#9AFF9A',
     s_width: 0,
     s_height: 0,
