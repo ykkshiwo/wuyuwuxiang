@@ -5,7 +5,7 @@
   right: 0;
   /* bottom: 20rpx; */
   top: 25%;
-  position: fixed;
+  position: fixed; 
   padding-left: 5rpx;
   padding-right: 1rpx;
 }
@@ -113,6 +113,7 @@
   text-align: center;
   box-shadow: darkgrey 5px 5px 10px 2px;
   font-family: 'SimHei';
+  position: relative;
 }
 
 .city:active{
@@ -221,10 +222,13 @@
    /* border: 1rpx solid blue;  */
   border-radius: 5px;
   width: 80%;
+  /* height: 80rpx; */
   text-align: center;
-  background-color: gray;
-  margin: 5rpx 10rpx 5rpx 10rpx;
-  padding: 5rpx 10rpx 5rpx 10rpx;
+  margin: 10rpx 10rpx 5rpx 10rpx;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+  background-color: red;
+  color: white;
+  font-weight:bold;
 }
 
 .citys_{
@@ -240,7 +244,18 @@
   /* border: 3rpx solid blue; */
   float: left;
   margin: 5rpx 10rpx 5rpx 10rpx;
-  padding: 5rpx 10rpx 5rpx 10rpx;
+  padding: 10rpx 20rpx 10rpx 20rpx;
   border-radius: 5px;
-  background-color: gray;
+  background-color: blue;
+  color: white;
+  font-weight:bold;
+}
+
+.hot{
+  height: 60rpx;
+  width: 60rpx;
+  position: absolute; 
+  top: -30rpx;
+  right: -30rpx;
+  /* border: 1rpx solid black; */
 }
