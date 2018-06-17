@@ -96,3 +96,13 @@
   width: 240rpx; 
   height: 100rpx;
 }
+
+.wywx-yz{
+  position: absolute;
+  width: 80rpx;
+  height: 80rpx;
+  bottom: 30rpx;
+  right: 30rpx;
+  /* border: 1rpx solid black; */
+  opacity: 0.7
+}
