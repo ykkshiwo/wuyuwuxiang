@@ -75,32 +75,24 @@ Page({
         zuobiao: wx.getStorageSync('zuobiao'),
         To: options.To,
       })
-      //console.log("citys: ", this.data.citys)
-      //console.log("zuobiao: ", this.data.zuobiao)
       var provices = wx.getStorageSync('provices');
       if (provices.indexOf("河北省") > -1){
         var new_length = provices.push("河北的廊坊")
       }
-      // this.setData({
-      //   provices: provices,
-      // })
-      console.log("哪些省：", provices)
+      console.log("到达了哪些省：", provices)
       var newMyChinaProvices = this.data.myChinaProvices.map(function(x){if(provices.includes(x)){ return '0' + x } else { return x } })
       newMyChinaProvices.sort()
       console.log(newMyChinaProvices)
       this.setData({
         newMyChinaProvices: newMyChinaProvices
       })
-
     }
     else {
       this.setData({
         home_long: options.home_long,
         home_lat: options.home_lat,
-        home_address: options.home_address,
         school_long: options.school_long,
         school_lat: options.school_lat,
-        school_address: options.school_address,
         To: options.To,
       })
       this.data.myChinaProvices.push("河北的廊坊")
@@ -232,7 +224,7 @@ Page({
       context.setStrokeStyle(this.data.dalu_color)
       console.log(this.data.newMyChinaProvices[j][0])
       if ( this.data.newMyChinaProvices[j][0] === '0') {
-        context.setFillStyle('#CDC9C9')
+        context.setFillStyle('#8B8989')
         p = this.data.newMyChinaProvices[j].slice(1)
       }
       else{
@@ -278,6 +270,9 @@ Page({
         context.setFontSize(16)
         context.setFillStyle(this.data.to_color)
         context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+
+        //端午定制版
+        // context.fillText("不屈的流放" + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
 
         context.beginPath()
         this.writeCityName(context)
@@ -339,7 +334,7 @@ Page({
 
       context.setFontSize(16)
       context.setFillStyle('yellow')
-      context.fillText("从我家到我" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+      context.fillText("从我家到" + this.data.To, 0.05 * this.data.s_width, 0.52 * this.data.s_height)
       context.fillText("直线距离为：" + this.data.dis + "公里", 0.05 * this.data.s_width, 0.55 * this.data.s_height)
       context.stroke()
     }
@@ -352,11 +347,29 @@ Page({
     context.fillText("由“吾与吾乡”绘制", 0.05 * this.data.s_width, 0.05 * this.data.s_width + 8)
     context.stroke()
 
+    //端午定制
+    // context.beginPath()
+    // context.setFillStyle('#F0F8FF')
+    // context.font = "40px 隶书"
+    // context.setFontSize(20)
+    // context.fillText("路漫漫其修远兮", 0.2 * this.data.s_width, 0.1 * this.data.s_height)
+    // context.fillText("吾将上下而求索", 0.28 * this.data.s_width, 0.1 * this.data.s_height + 20)
+    // context.stroke()
+    //
+
     try {
       context.setFontSize(22)
       context.setFillStyle('yellow')
       context.fillText(app.globalData.userInfo.nickName, 0.05 * this.data.s_width, 0.49 * this.data.s_height)
-      // context.drawImage(app.globalData.userInfo.avatarUrl, 0.4 * this.data.s_width, 0.1 * this.data.s_width, 0.2 * this.data.s_width, 0.2 * this.data.s_width)
+
+      //端午定制版
+      // context.beginPath()
+      // context.setFillStyle('#FF4500')
+      // context.font = "40px 隶书"
+      // context.setFontSize(16)
+      // context.fillText("屈原，屈子", 0.05 * this.data.s_width, 0.49 * this.data.s_height)
+      // context.stroke()
+      //
     }
     catch (err) {
       console.log(err)
