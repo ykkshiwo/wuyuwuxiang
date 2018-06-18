@@ -87,15 +87,16 @@
 }
 
 .get-citys{
-  /* border: 1rpx solid yellow; */
+   /* border: 1rpx solid yellow;  */
   /* padding: 10rpx;   */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
+  align-items: center;
 }
 
 .dang-citys{
-  /* border: 1rpx solid red; */
+   border: 1rpx solid red; 
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -103,7 +104,7 @@
 }
 
 .city{
-  /* border: 1rpx solid green; */
+  /* border: 1rpx solid green;  */
   background-color: #00FFFF;
   border-radius: 5px;
   margin-top: 30rpx;
@@ -121,8 +122,8 @@
 }
 
 .duo-citys{
-  /* border: 1rpx solid goldenrod; */
-  width: 50%;
+  /* border: 1rpx solid goldenrod;  */
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -93,8 +93,8 @@
 
 .wywx{
   /* border: 1rpx solid red;  */
-  width: 240rpx; 
-  height: 100rpx;
+  width: 280rpx; 
+  height: 90rpx;
 }
 
 .wywx-yz{

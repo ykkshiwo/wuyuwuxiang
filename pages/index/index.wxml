@@ -8,7 +8,7 @@
     <image class='wywx' src='../../images/wywx.png' mode='aspectFit' open-type="getUserInfo"></image>
   </navigator> -->
   <button class="kf_button" open-type="getUserInfo" catchtap='toXuanzhe'>
-    <image class="wywx" src="../../images/wywx.png"></image>
+    <image class="wywx" src="../../images/wywx1.png"></image>
 </button> 
 </view>
 

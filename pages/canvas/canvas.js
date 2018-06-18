@@ -282,6 +282,10 @@ Page({
         console.log("多点多线作图")
         context.beginPath()
         context.setStrokeStyle("red")
+        if (this.data.To === '想去的地方') {
+          context.setLineDash([2, 2], 10)
+          context.setStrokeStyle("yellow")
+        }
         context.setLineWidth(1)
         var zuobiao = this.data.zuobiao
         for (var i = 0; i < zuobiao.length; i++) {

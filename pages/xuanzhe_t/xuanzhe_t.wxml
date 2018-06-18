@@ -22,11 +22,11 @@
   终点却有很多：
   </view>
   <view class='get-citys'>
-    <view class='dang-citys'>
+    <!-- <view class='dang-citys'>
       <view class='city' catchtap='xuanYuanFang' id="我的大学"> 我的大学 </view>
       <view class='city' catchtap='xuanYuanFang' id="工作的地方"> 工作的地方 </view>
       <view class='city' catchtap='xuanYuanFang' id="梦想的远方"> 梦想的远方 </view>
-    </view>
+    </view> -->
     <view class='duo-citys'>
       <view class='city' catchtap='xuanYuanFang' id="想去的地方">
         想去的地方 
@@ -45,7 +45,7 @@
 </view>
 
   <view class='button'>
-    <button plain='true' type='primary' catchtap='produce'>产生图片</button>
+    <button plain='true' type='primary' catchtap='produce'>绘制图片</button>
   </view>
 
 <!-- 以下为隐藏界面 -->
