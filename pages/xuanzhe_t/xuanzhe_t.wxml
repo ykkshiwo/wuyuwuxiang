@@ -2,7 +2,7 @@
 <view class="container">
  
 <button class="kf_button" open-type="contact" session-from="weapp">
-    <image class="kf_image" src="../../images/kefu.png"></image>
+    <image class="kf_image" src="../../images/kefu1.png"></image>
 </button> 
 
 <view class='get'>

@@ -15,7 +15,7 @@
 .kf_image{
   z-index: 9999;
   width: 100rpx;
-  height: 80rpx;
+  height: 100rpx;
 }
 
 .container { 
@@ -229,6 +229,12 @@
   background-color: red;
   color: white;
   font-weight:bold;
+  box-shadow: 0 1px white inset;
+  text-shadow: 0 1px 1px black;
+}
+
+.provice:active{
+  box-shadow: .05em .1em .2em rgba(0,0,0,.6) inset;
 }
 
 .citys_{
@@ -249,6 +255,13 @@
   background-color: blue;
   color: white;
   font-weight:bold;
+
+  box-shadow: 0 1px white inset;
+  text-shadow: 0 1px 1px black;
+}
+
+.test_citys:active{
+  box-shadow: .05em .1em .2em rgba(0,0,0,.6) inset;
 }
 
 .hot{
