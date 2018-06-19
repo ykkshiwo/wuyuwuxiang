@@ -3,8 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/canvas/canvas",
-    "pages/xuanzhe_t/xuanzhe_t",
-    "pages/baiduapi/baiduapi"
+    "pages/xuanzhe_t/xuanzhe_t"
   ],
   "window":{
     "backgroundTextStyle":"light",

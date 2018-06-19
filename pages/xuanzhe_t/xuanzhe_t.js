@@ -17,6 +17,7 @@ Page({
     school_long: '',
     home_lat: '',
     home_long: '',
+    home_address:'',
     is_x_yj: false,
     customItem: '全部',
     allCity: '吾乡->',
@@ -50,18 +51,18 @@ Page({
   xuanYuanFang: function(e){
     console.log("选择的按钮为",e.currentTarget.id)
     switch (e.currentTarget.id){
-      case "我的大学":
-        console.log("执行我的大学")
-        this.dangCity(e.currentTarget.id)
-        break;
-      case "工作的地方":
-        console.log("执行工作的地方")
-        this.dangCity(e.currentTarget.id)
-        break;
-      case "梦想的远方":
-        console.log("执行梦想的远方")
-        this.dangCity(e.currentTarget.id)
-        break;
+      // case "我的大学":
+      //   console.log("执行我的大学")
+      //   this.dangCity(e.currentTarget.id)
+      //   break;
+      // case "工作的地方":
+      //   console.log("执行工作的地方")
+      //   this.dangCity(e.currentTarget.id)
+      //   break;
+      // case "梦想的远方":
+      //   console.log("执行梦想的远方")
+      //   this.dangCity(e.currentTarget.id)
+      //   break;
       case "想去的地方":
         console.log("执行想去的地方")
         this.duoCity(e.currentTarget.id)
@@ -102,9 +103,19 @@ Page({
         console.log(res)
         var long_ = res.longitude
         var lat_ = res.latitude
+        var home_address = res.address
+        console.log(home_address)
+        try{
+          var provice_name = that.proviceName(home_address)
+        }
+        catch(err){
+          console.log(err)
+        }
         that.setData({
           home_lat: lat_,
           home_long: long_,
+          home_address: provice_name,
+          allProvice: provice_name
         })
       },
       fail: function () {
@@ -115,6 +126,50 @@ Page({
         })
       }
     })
+  },
+
+  proviceName: function(x){
+    var y = x.slice(0,2)
+    switch (y){
+      case '黑龙':
+        return '黑龙江省';
+        break;     
+      case '西藏':
+        return '西藏藏族自治区';
+        break;
+      case '新疆':
+        return '新疆维吾尔族自治区';
+        break;
+      case '宁夏':
+        return '宁夏回族自治区';
+        break;
+      case '内蒙':
+        return '内蒙古自治区';
+        break;
+      case '广西':
+        return '广西壮族自治区';
+        break;
+      case '香港':
+        return '香港特别行政区';
+        break;
+      case '澳门':
+        return '澳门特别行政区';
+        break;
+      case '上海':
+        return '上海市';
+        break;
+      case '北京':
+        return '北京市';
+        break;
+      case '天津':
+        return '天津市';
+        break;
+      case '重庆':
+        return '重庆市';
+        break;
+      default:
+        return y + '省'
+    }
   },
 
   xuanLocationSchool: function () {
