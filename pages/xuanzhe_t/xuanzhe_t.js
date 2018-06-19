@@ -252,6 +252,7 @@ Page({
               })
             } else if (res.cancel) {
               console.log('用户点击取消')
+              that.xuanLocationHome()
             }
           }
         })
@@ -278,6 +279,7 @@ Page({
         })
       }
     }
+    // this.confirm()
   },
 
 
@@ -423,6 +425,7 @@ Page({
     this.setData({
       display_pc: false,
     })
+    this.clear()
   },
 
   clear: function () {

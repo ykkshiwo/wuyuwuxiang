@@ -142,7 +142,16 @@
   top: 5%;
   /* background-color: black; */
   width: 90%;
-  height: 83%;
+  height: 90%;
+}
+
+.close{
+  position: absolute;
+  right: -35rpx;
+  top: -35rpx;
+  /* border: 1rpx solid blue; */
+  height: 65rpx;
+  width: 65rpx;
 }
 
 .provices_citys{
@@ -181,14 +190,15 @@
   /* height: 10%; */
   display: flex;
   flex-direction: row;
-  /* border: 1rpx solid greenyellow;  */
+  /* border: 1rpx solid greenyellow;   */
   justify-content:center;
   background-color: rgba(255, 255, 255, 0);
+  margin-top: 15rpx;
 }
 
 .clear{
   /* border: 1rpx solid green; */
-  width: 35%;
+  width: 42%;
   text-align: center;
   margin-right: 20rpx;
   border-radius: 5px;
@@ -198,16 +208,24 @@
   box-shadow: darkgrey 5px 5px 6px 2px;
 }
 
+.clear:active{
+  box-shadow: darkgrey 2px 2px 3px 1px;
+}
+
 .confirm{
   /* border: 1rpx solid green; */
-  width: 35%;
+  width: 42%;
   text-align: center;
   margin-left: 20rpx;
   border-radius: 5px;
-   padding: 10rpx; 
-    color: white;
+  padding: 10rpx; 
+  color: white;
   background-color: green;
   box-shadow: darkgrey 5px 5px 6px 2px;
+}
+
+.confirm:active{
+  box-shadow: darkgrey 2px 2px 3px 1px;
 }
 
 .provices{

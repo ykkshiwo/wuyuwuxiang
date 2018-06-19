@@ -152,7 +152,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function () { 
     wx.showLoading({
       title: '绘制中······',
     })
@@ -379,7 +379,7 @@ Page({
       console.log(err)
     }
 
-    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, this.data.s_height * 0.72, this.data.s_width * 0.25, this.data.s_width * 0.25)
+    context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, this.data.s_height - 0.3 * this.data.s_width, this.data.s_width * 0.25, this.data.s_width * 0.25)
 
     context.draw()
 
@@ -397,7 +397,7 @@ Page({
   },
 
   writeCityName: function (context) {
-    context.setFontSize(16)
+    context.setFontSize(12)
     context.setFillStyle(this.data.citysname_color)
     // context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
     var citys = this.data.citys
@@ -405,12 +405,12 @@ Page({
     console.log(citys)
     var citys_string = citys.join(',')
     console.log(citys_string)
-    var first_ = parseInt(this.data.s_width * 0.90 / 16)
+    var first_ = parseInt(this.data.s_width * 0.90 / 12)
     console.log(first_)
-    var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 16)
+    var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 12)
     console.log(second__)
     // 改一下，弄成三行长的
-    var three_long = 6 * first_
+    var three_long = 9 * first_
     var l_n = citys_string.slice(0, three_long)
     var s_n = citys_string.slice(three_long)
 
@@ -418,12 +418,12 @@ Page({
     console.log('s_n: ', s_n)
 
     var l = 0
-    for (var i = 0; i < 6; i++) {
-      console.log("第", i, "行")
+    for (var i = 0; i < 9; i++) {
+      // console.log("第", i, "行")
       for (var j = 0; j < first_; j++) {
-        console.log(j)
+        // console.log(j)
         if (l_n[l]) {
-          context.fillText(l_n[l], 0.05 * this.data.s_width + j * 16, (0.55 + i * 0.03) * this.data.s_height)
+          context.fillText(l_n[l], 0.05 * this.data.s_width + j * 12, (0.55 + i * 0.025) * this.data.s_height)
           l += 1
         }
       }
@@ -436,7 +436,7 @@ Page({
       for (var j = 0; j < second__; j++) {
         console.log(j)
         if (s_n[s]) {
-          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 16, (0.55 + 0.18 + i * 0.03) * this.data.s_height)
+          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 12, (0.55 + 0.025*9 + i * 0.025) * this.data.s_height)
           s += 1
         }
       }

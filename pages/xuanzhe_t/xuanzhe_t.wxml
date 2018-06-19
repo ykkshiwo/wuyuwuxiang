@@ -46,11 +46,12 @@
 </view>
 
   <view class='button'>
-    <button plain='true' type='primary' catchtap='produce'>绘制图片</button>
+    <!-- <button plain='true' type='primary' catchtap='produce'>绘制图片</button> -->
   </view>
 
 <!-- 以下为隐藏界面 -->
 <view wx:if="{{ display_pc }}" class='citys_xuanzhe'>
+<image catchtap='confirm' src='../../images/close.png' class='close' mode='aspectFit'></image>
   <view class='provices_citys'>
     <scroll-view class='provices' scroll-y='true'>
       <view wx:for="{{provices}}">
@@ -75,10 +76,10 @@
   </view>
   <view class='button_clear_ok'>
     <view class='clear' catchtap='clear'>
-        清除
-    </view>
-    <view class='confirm'  catchtap='confirm'>
-        确定
+        重选
+    </view> 
+    <view class='confirm'  catchtap='produce'>
+        提交
     </view>
   </view>
 </view>
