@@ -16,7 +16,7 @@
     <view class='jwd'>
       <view>经度：{{ home_lat }}</view>
       <view>维度：{{ home_long }}</view>
-      <view>省份：{{ home_address }}</view>
+      <!-- <view>省份：{{ home_address }}</view> -->
     </view>
   </view>
   <view class='zhongdian_henduo'>
