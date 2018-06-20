@@ -3,7 +3,7 @@ function getRad(d) {
   return d * PI / 180.0;
 }
 
-exports.getDistance = function (lat1, lng1, lat2, lng2) {
+function getDistance(lat1, lng1, lat2, lng2) {
   // console.log("距离函数接受到的参数为： ", lat1, lng1, lat2, lng2)
   var lat1 = parseFloat(lat1) + 0.000001
   var z = (parseFloat(lat1) + parseFloat(lat2)) / 2
@@ -31,4 +31,21 @@ exports.getDistance = function (lat1, lng1, lat2, lng2) {
   s = s.toFixed(2);//指定小数点后的位数。 
   console.log("距离函数计算结果为： ", s)
   return s;
+}
+
+function allDistance(szZuobiao){
+  console.log(szZuobiao)
+  var D=0;
+  for (var i=0;i<szZuobiao.length-1;i++){
+    var d = getDistance(szZuobiao[i][1], szZuobiao[i][0],szZuobiao[i+1][1],szZuobiao[i+1][0])
+    console.log(d)
+    D = parseFloat(D) + parseFloat(d)
+    console.log(D)
+  }
+  return D;
+}
+
+module.exports = {
+  getDistance: getDistance,
+  allDistance: allDistance
 }

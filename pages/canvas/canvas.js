@@ -152,7 +152,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () { 
+  onReady: function () {
     wx.showLoading({
       title: '绘制中······',
     })
@@ -245,6 +245,9 @@ Page({
     if (this.data.is_x_yj === '1') {
       if (this.data.To === '彩色的旅途') {
         console.log("我的彩色旅途")
+        var allDistance = d.allDistance(this.data.zuobiao)
+        console.log("总里程为：", allDistance)
+
         context.beginPath()
         context.setStrokeStyle("red")
         context.setLineWidth(1)
@@ -269,7 +272,7 @@ Page({
         context.beginPath()
         context.setFontSize(16)
         context.setFillStyle(this.data.to_color)
-        context.fillText(this.data.To + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
+        context.fillText(this.data.To + ": " + "( " +  allDistance + "公里 )", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
 
         //端午定制版
         // context.fillText("不屈的流放" + ": ", 0.05 * this.data.s_width, 0.52 * this.data.s_height)
