@@ -4,7 +4,7 @@
 
  <view class='button_w'>
     <view class='reset'>
-      <button catchtap='daochuCanvas' type='primary' plain='false'>导出</button>
+      <button catchtap='daochuCanvas' type='primary' plain='false'>储存</button>
     </view>
     <view class='reset'>
       <button type="primary" open-type='share' plain='false'>转发</button>

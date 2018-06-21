@@ -25,7 +25,9 @@ Page({
     display_pc: false,
     disallCitys: '',
     now_provice: '',
-    allProvice: ''
+    allProvice: '',
+    disallCitys_xslt: '',
+    is_cslt:'',
   },
 
   // radioChange: function (e) {
@@ -66,14 +68,23 @@ Page({
       case "想去的地方":
         console.log("执行想去的地方")
         this.duoCity(e.currentTarget.id)
+        this.setData({
+          is_cslt: false
+        })
         break;
       case "去过的地方":
         console.log("执行去过的地方")
         this.duoCity(e.currentTarget.id)
+        this.setData({
+          is_cslt: false
+        })
         break;
       case "彩色的旅途":
         console.log("执行彩色的旅途")
         this.duoCity(e.currentTarget.id)
+        this.setData({
+          is_cslt: true
+        })
         break;
     }
   },
@@ -308,6 +319,8 @@ Page({
     console.log(aCity)
     var allCity = this.data.allCity + ';' + aCity
     var disallCitys = allCity.slice(5)
+    var disallCitys_xslt = disallCitys.replace(/;/g,'->')
+    // console.log("disallCitys_xslt",disallCitys_xslt)
     var allProvice = this.data.allProvice + ';' + this.data.now_provice
     var allProvice_sz = this.bouncer(allProvice.split(";"))
     var allCity_unique = o.unique(allProvice_sz)
@@ -316,7 +329,8 @@ Page({
       allCity: allCity,
       disallCitys: disallCitys,
       disallProvice: allCity_unique,
-      allProvice: allProvice
+      allProvice: allProvice,
+      disallCitys_xslt: disallCitys_xslt,
     })
   },
 
