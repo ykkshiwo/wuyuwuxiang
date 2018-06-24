@@ -10,6 +10,7 @@
   起点只有一个：
   </view>
   <view class='get-home'>
+    <image class='image-home' mode='scaleToFill' src='../../images/dingwei.png'></image>
     <view class='qidian' catchtap='xuanLocationHome'>
       <text class='qidian-wz'>起点只有吾乡</text> 
     </view>
@@ -29,17 +30,28 @@
       <view class='city' catchtap='xuanYuanFang' id="梦想的远方"> 梦想的远方 </view>
     </view> -->
     <view class='duo-citys'>
-      <view class='city' catchtap='xuanYuanFang' id="想去的地方">
+      <view class='test1'>
+        <image class='image' mode='scaleToFill' src='../../images/want.png'></image> 
+                <view class='city' catchtap='xuanYuanFang' id="想去的地方">
         想去的地方 
-        <image src='../../images/hot.png' class='hot' mode='aspectFit'></image>
-       </view>
-      <view class='city' catchtap='xuanYuanFang' id="去过的地方"> 
+          <image src='../../images/hot.png' class='hot' mode='aspectFit'></image>
+        </view>
+      </view>
+
+      <view class='test1'>
+        <image class='image' mode='scaleToFill' src='../../images/have.png'></image> 
+        <view class='city' catchtap='xuanYuanFang' id="去过的地方"> 
         去过的地方 
         <image src='../../images/hot.png' class='hot' mode='aspectFit'></image>
       </view>
-      <view class='city' catchtap='xuanYuanFang' id="彩色的旅途"> 
+      </view>
+
+      <view class='test1'>
+        <image class='image' mode='scaleToFill' src='../../images/color.png'></image> 
+ <view class='city' catchtap='xuanYuanFang' id="彩色的旅途"> 
         <image src='../../images/new.png' class='hot' mode='aspectFit'></image>
-        彩色的旅途 
+        彩色的旅途  
+      </view>
       </view>
     </view>
   </view>
