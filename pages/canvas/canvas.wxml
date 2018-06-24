@@ -10,7 +10,7 @@
       <button type="primary" open-type='share' plain='false'>转发</button>
     </view>
     <view class='reset'>
-      <button type="primary" catchtap='toIndex' plain='false'>绘制</button>
+      <button type="primary" catchtap='toIndex' plain='false'>返回</button>
     </view>
 </view> 
 
