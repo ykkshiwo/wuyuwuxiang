@@ -5,8 +5,8 @@ const d = require('../../utils/distance.js')
 const h = require("../../dataofmap/nanhai.js")
 const nh = h.nanhai
 
-const m = require('../../dataofmap/dalu_taiwang_hainan.js')
-const map = m.map
+// const m = require('../../dataofmap/dalu_taiwang_hainan.js')
+// const map = m.map
 
 const p = require("../../dataofmap/china_34.js")
 const p34 = p.p34
