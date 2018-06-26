@@ -448,6 +448,7 @@ Page({
       disallCitys: '',
       disallProvice: '',
       allProvice: '',
+      disallCitys_xslt: '',
     })
   }
 })
