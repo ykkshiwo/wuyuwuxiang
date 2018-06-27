@@ -5,7 +5,7 @@
     <image class="kf_image" src="../../images/kefu1.png"></image>
 </button> 
 
-<view class='get'>
+<view class='get'> 
   <view class='qidian_yige'>
   起点只有一个：
   </view>
