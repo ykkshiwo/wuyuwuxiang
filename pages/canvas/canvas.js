@@ -388,10 +388,6 @@ Page({
 
     wx.hideLoading()
 
-    wx.pageScrollTo({
-      scrollTop: this.data.s_height,
-      duration: 500
-    })
   },
 
   longToZB: function (long, sw) {
