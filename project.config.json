@@ -43,12 +43,6 @@
 					"name": "xuanzhe_t",
 					"pathName": "pages/xuanzhe_t/xuanzhe_t",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "baiduapi",
-					"pathName": "pages/baiduapi/baiduapi",
-					"query": ""
 				}
 			]
 		}
