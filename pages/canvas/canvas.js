@@ -382,7 +382,7 @@ Page({
       console.log(err)
     }
 
-    // context.drawImage('../../images/erweima.png', 0.05 * this.data.s_width, this.data.s_height - 0.25 * this.data.s_width, this.data.s_width * 0.2, this.data.s_width * 0.2)
+    context.drawImage('../../images/xcxm.png', 0.05 * this.data.s_width, this.data.s_height - 0.25 * this.data.s_width, this.data.s_width * 0.2, this.data.s_width * 0.2)
 
     context.draw()
 
@@ -417,8 +417,8 @@ Page({
     console.log(first_)
     var second__ = parseInt((this.data.s_width * 0.90 - (this.data.s_width * 0.25 + 4)) / 12)
     console.log(second__)
-    // 改一下，弄成三行长的
-    var three_long = 18 * first_
+    // 改一下，弄成n行长的
+    var three_long = 13 * first_
     var l_n = citys_string.slice(0, three_long)
     var s_n = citys_string.slice(three_long)
 
@@ -426,7 +426,7 @@ Page({
     console.log('s_n: ', s_n)
 
     var l = 0
-    for (var i = 0; i < 18; i++) {
+    for (var i = 0; i < 13; i++) {
       // console.log("第", i, "行")
       for (var j = 0; j < first_; j++) {
         // console.log(j)
@@ -444,7 +444,7 @@ Page({
       for (var j = 0; j < second__; j++) {
         console.log(j)
         if (s_n[s]) {
-          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 12, (0.55 + 0.025*18 + i * 0.025) * this.data.s_height)
+          context.fillText(s_n[s], 0.05 * this.data.s_width + this.data.s_width * 0.25 + 4 + j * 12, (0.55 + 0.025*13 + i * 0.025) * this.data.s_height)
           s += 1
         }
       }
@@ -496,7 +496,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '旅途左右万里，起点只有吾乡。',
+      title: '旅途左右万里，起点只有吾乡。在这里丈量远方和家的距离。',
       path: '/pages/index/index',
       imageUrl: "/images/zf1.jpg",
       success: function (res) {

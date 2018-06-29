@@ -40,7 +40,7 @@ function allDistance(szZuobiao){
     var d = getDistance(szZuobiao[i][1], szZuobiao[i][0],szZuobiao[i+1][1],szZuobiao[i+1][0])
     console.log(d)
     D = parseFloat(D) + parseFloat(d)
-    D = D.toFixed(2)
+    D = D.toFixed(0)
     console.log(D)
   }
   return D;
