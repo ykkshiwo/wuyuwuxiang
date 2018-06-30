@@ -26,8 +26,9 @@ Page({
     disallCitys: '',
     now_provice: '',
     allProvice: '',
-    disallCitys_xslt: '',
+    disallCitys_xslt: '例：起始地（家）->城市1->城市2->目的地',
     is_cslt:'',
+    scrollTop_d: '',
   },
 
   // radioChange: function (e) {
@@ -83,7 +84,8 @@ Page({
         console.log("执行彩色的旅途")
         this.duoCity(e.currentTarget.id)
         this.setData({
-          is_cslt: true
+          is_cslt: true,
+          disallCitys_xslt: '例：起始地（家）->城市1->城市2->目的地',
         })
         break;
     }
@@ -248,7 +250,7 @@ Page({
         var that = this
         wx.showModal({
           title: '提示',
-          content: '您未选择家的地理数据，将导致绘图出现错误，继续点击确定，重选点击取消',
+          content: '您未选择起始地(家)的地理位置，将导致绘图出现错误，继续点击确定，补选点击取消。',
           success: function (res) {
             if (res.confirm) {
               console.log('用户点击确定')
@@ -278,7 +280,7 @@ Page({
         var that = this
         wx.showModal({
           title: '提示',
-          content: '您未选择完整地理数据，将导致绘图出现错误，继续点击确定，重选点击取消',
+          content: '您未选择起始地(家)的地理位置，将导致绘图出现错误，继续点击确定，补选点击取消。',
           success: function (res) {
             if (res.confirm) {
               console.log('用户点击确定')
@@ -319,7 +321,7 @@ Page({
     console.log(aCity)
     var allCity = this.data.allCity + ';' + aCity
     var disallCitys = allCity.slice(5)
-    var disallCitys_xslt = disallCitys.replace(/;/g,'->')
+    var disallCitys_xslt_ = disallCitys.replace(/;/g,'->')
     // console.log("disallCitys_xslt",disallCitys_xslt)
     var allProvice = this.data.allProvice + ';' + this.data.now_provice
     var allProvice_sz = this.bouncer(allProvice.split(";"))
@@ -330,7 +332,8 @@ Page({
       disallCitys: disallCitys,
       disallProvice: allCity_unique,
       allProvice: allProvice,
-      disallCitys_xslt: disallCitys_xslt,
+      disallCitys_xslt: '起始地->' + disallCitys_xslt_ + '(目的地)',
+      scrollTop_d: 2000,
     })
   },
 

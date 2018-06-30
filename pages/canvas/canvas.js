@@ -382,7 +382,7 @@ Page({
       console.log(err)
     }
 
-    context.drawImage('../../images/xcxm.png', 0.05 * this.data.s_width, this.data.s_height - 0.25 * this.data.s_width, this.data.s_width * 0.2, this.data.s_width * 0.2)
+    // context.drawImage('../../images/xcxm.png', 0.05 * this.data.s_width, this.data.s_height - 0.25 * this.data.s_width, this.data.s_width * 0.2, this.data.s_width * 0.2)
 
     context.draw()
 

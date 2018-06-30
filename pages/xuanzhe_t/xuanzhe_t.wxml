@@ -79,10 +79,10 @@
     </scroll-view>
   </view>
   <view class='have_choose_citys_'>
-    <scroll-view class='have_choose_citys' scroll-y='true' wx:if="{{ is_cslt }}">
+    <scroll-view class='have_choose_citys' scroll-y='true' scroll-top="{{scrollTop_d}}" wx:if="{{ is_cslt }}">
   {{ disallCitys_xslt }}
   </scroll-view>
-    <scroll-view class='have_choose_citys' scroll-y='true' wx:else>
+    <scroll-view class='have_choose_citys' scroll-y='true' scroll-top="{{scrollTop_d}}" wx:else>
   {{ disallCitys }}
   </scroll-view>
     <scroll-view class='have_choose_provices' scroll-y='true'>

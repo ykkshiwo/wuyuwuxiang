@@ -141,6 +141,7 @@
   width: 100%;
   height: 100%;
   opacity: 0.8;
+  border-radius: 5px;
 }
 
 .duo-citys{
@@ -319,8 +320,9 @@
 .test1{
   height: 33%;
   width: 100%;
-  /* border: 1rpx solid blue; */
+  /* border: 1rpx solid blue;    */
   position: relative;
+  margin-top: 10rpx;
 }
 
 .test2{
